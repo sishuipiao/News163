@@ -91,10 +91,10 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ijf-qV-UoX">
-                    <rect key="frame" x="0.0" y="60" width="320" height="140"/>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ijf-qV-UoX">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="256"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="140" id="cBs-ST-PsA"/>
+                        <constraint firstAttribute="height" constant="256" id="qKm-BC-M2b"/>
                     </constraints>
                     <state key="normal">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -110,20 +110,20 @@
                 <constraint firstItem="Yql-pi-O4U" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="68" id="2UR-Qu-sEc"/>
                 <constraint firstAttribute="trailing" secondItem="Da4-Vg-z7y" secondAttribute="trailing" constant="16" id="9sp-Lr-Bi3"/>
                 <constraint firstItem="dDc-eJ-dBG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="68" id="AE9-ON-dEn"/>
+                <constraint firstItem="Ijf-qV-UoX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="EPw-NA-pw8"/>
                 <constraint firstItem="Da4-Vg-z7y" firstAttribute="top" secondItem="dDc-eJ-dBG" secondAttribute="bottom" constant="20" id="EbZ-TE-yUc"/>
-                <constraint firstItem="Ijf-qV-UoX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="60" id="FZ9-fV-gSj"/>
                 <constraint firstItem="q9I-eu-NK5" firstAttribute="top" secondItem="d3v-EY-aWb" secondAttribute="bottom" constant="1" id="LZg-AN-AfW"/>
                 <constraint firstItem="d3v-EY-aWb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="18" id="Li8-We-xuU"/>
                 <constraint firstItem="Yql-pi-O4U" firstAttribute="leading" secondItem="d3v-EY-aWb" secondAttribute="trailing" id="SQ9-9t-hfg"/>
                 <constraint firstItem="dIf-Gd-Dy5" firstAttribute="top" secondItem="q9I-eu-NK5" secondAttribute="bottom" constant="1" id="cls-4D-HPl"/>
                 <constraint firstItem="dIf-Gd-Dy5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="27" id="dVH-YC-rfP"/>
-                <constraint firstItem="Ijf-qV-UoX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="kUI-bA-agt"/>
+                <constraint firstAttribute="trailing" secondItem="Ijf-qV-UoX" secondAttribute="trailing" id="edZ-TV-wjy"/>
                 <constraint firstItem="G3F-c9-lWK" firstAttribute="top" secondItem="dDc-eJ-dBG" secondAttribute="bottom" constant="2" id="mwb-hI-dLh"/>
                 <constraint firstAttribute="trailing" secondItem="dDc-eJ-dBG" secondAttribute="trailing" constant="16" id="mxb-0z-efT"/>
                 <constraint firstItem="xV0-jE-oJJ" firstAttribute="leading" secondItem="d3v-EY-aWb" secondAttribute="trailing" constant="8" id="tfL-Ja-WV8"/>
                 <constraint firstItem="q9I-eu-NK5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="27" id="tna-eO-Pxu"/>
+                <constraint firstItem="Ijf-qV-UoX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="u56-Vs-wDh"/>
                 <constraint firstItem="q9I-eu-NK5" firstAttribute="top" secondItem="xV0-jE-oJJ" secondAttribute="bottom" constant="15" id="udE-b0-2p2"/>
-                <constraint firstAttribute="trailing" secondItem="Ijf-qV-UoX" secondAttribute="trailing" id="usd-YN-Fgx"/>
                 <constraint firstAttribute="trailing" secondItem="G3F-c9-lWK" secondAttribute="trailing" constant="16" id="xWV-6f-PLD"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

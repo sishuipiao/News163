@@ -1,14 +1,14 @@
 //
-//  SXNavController.swift
+//  DetailController.swift
 //  News163
 //
-//  Created by panqiang on 15/8/3.
+//  Created by panqiang on 15/8/28.
 //  Copyright (c) 2015年 panqiang. All rights reserved.
 //
 
 import UIKit
 
-class SXNavController: UINavigationController {
+class DetailController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,9 +21,10 @@ class SXNavController: UINavigationController {
         // Dispose of any resources that can be recreated.
     }
     
-    override class func initialize() {
-        var navBar:UINavigationBar = UINavigationBar.appearance()
-        navBar.tintColor = UIColor.redColor();
+
+    @IBAction func backBtn(sender: AnyObject) {
+        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
     /*

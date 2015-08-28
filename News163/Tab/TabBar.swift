@@ -27,7 +27,6 @@ class TabBar: UIView {
     
     func addImageView() {
         var imgView = UIImageView()
-        imgView.image = UIImage(named: "")
         self.imgView = imgView
         self.addSubview(imgView)
     }
@@ -39,8 +38,8 @@ class TabBar: UIView {
         btn.setImage(UIImage(named: dis), forState: UIControlState.Disabled)
         
         btn.setTitle(title, forState: UIControlState.Normal)
-        btn.setTitleColor(UIColor(red: 149/255.0, green: 149/255.0, blue: 149/255.0, alpha: 1), forState: UIControlState.Normal)
-        btn.setTitleColor(UIColor(red: 183/255.0, green: 20/255.0, blue: 28/255.0, alpha: 1), forState: UIControlState.Disabled)
+        btn.setTitleColor(UIColor(red: 133/255.0, green: 133/255.0, blue: 133/255.0, alpha: 1), forState: UIControlState.Normal)
+        btn.setTitleColor(UIColor(red: 223/255.0, green: 48/255.0, blue: 49/255.0, alpha: 1), forState: UIControlState.Disabled)
         
         btn.addTarget(self, action: "btnClick:", forControlEvents: UIControlEvents.TouchDown)
         self.addSubview(btn)

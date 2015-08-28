@@ -81,7 +81,7 @@ class WeatherView: UIView {
         titleLabel.setWidth(itemView.width())
         titleLabel.setX(0)
         titleLabel.setY(btn.y() + btn.height())
-        titleLabel.font = UIFont(name: "HYQiHei", size: 16)
+        titleLabel.font = UIFont(name: "DS-Digital", size: 16)
         titleLabel.text = title
         titleLabel.textAlignment = NSTextAlignment.Center
         itemView.addSubview(titleLabel)

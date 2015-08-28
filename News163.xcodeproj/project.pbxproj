@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		9F21AA57636C94A394AC5DEA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0B46D16338F72FD0D9074DA /* libPods.a */; };
 		C001E11C1B5505F2001B0CB2 /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C001E11B1B5505F2001B0CB2 /* NewsModel.swift */; };
+		C003966D1B90118600B0112D /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = C003966C1B90118600B0112D /* Tools.swift */; };
+		C00396731B903DF400B0112D /* DS-DIGI.TTF in Resources */ = {isa = PBXBuildFile; fileRef = C003966F1B903DF400B0112D /* DS-DIGI.TTF */; };
+		C00396741B903DF400B0112D /* DS-DIGIB.TTF in Resources */ = {isa = PBXBuildFile; fileRef = C00396701B903DF400B0112D /* DS-DIGIB.TTF */; };
+		C00396751B903DF400B0112D /* lijinheiW8.TTF in Resources */ = {isa = PBXBuildFile; fileRef = C00396711B903DF400B0112D /* lijinheiW8.TTF */; };
+		C00396761B903DF400B0112D /* StencilStd.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C00396721B903DF400B0112D /* StencilStd.ttf */; };
 		C03FC6871B736185006A5EB3 /* SXTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03FC6861B736185006A5EB3 /* SXTableViewController.swift */; };
 		C042E4E81B4CBC4C008EB38B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C042E4E71B4CBC4C008EB38B /* AppDelegate.swift */; };
 		C042E4EA1B4CBC4C008EB38B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C042E4E91B4CBC4C008EB38B /* ViewController.swift */; };
@@ -16,27 +21,24 @@
 		C042E4EF1B4CBC4C008EB38B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C042E4EE1B4CBC4C008EB38B /* Images.xcassets */; };
 		C042E4FE1B4CBC4D008EB38B /* News163Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C042E4FD1B4CBC4D008EB38B /* News163Tests.swift */; };
 		C042E50C1B4CC0BE008EB38B /* NetworkTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = C042E50B1B4CC0BE008EB38B /* NetworkTools.swift */; };
+		C04C13621B8FEF0F00C4CC07 /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04C13611B8FEF0F00C4CC07 /* DetailController.swift */; };
 		C065088A1B8F0C92000AA55D /* BarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06508891B8F0C92000AA55D /* BarButton.swift */; };
 		C065088C1B8F0DC0000AA55D /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C065088B1B8F0DC0000AA55D /* TabBar.swift */; };
 		C06508BC1B8F1820000AA55D /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06508BB1B8F1820000AA55D /* MainTabBarController.swift */; };
-		C06AF1751B8D463B00AF11DC /* HYQiHei-50J.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C06AF1741B8D463B00AF11DC /* HYQiHei-50J.ttf */; };
 		C06AF1771B8D57AC00AF11DC /* NewsURLs.plist in Resources */ = {isa = PBXBuildFile; fileRef = C06AF1761B8D57AC00AF11DC /* NewsURLs.plist */; };
 		C06AF1791B8DA77F00AF11DC /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06AF1781B8DA77F00AF11DC /* WeatherModel.swift */; };
 		C06AF17E1B8DA96200AF11DC /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06AF17D1B8DA96200AF11DC /* WeatherView.swift */; };
 		C06AF1801B8DAD9500AF11DC /* WeatherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C06AF17F1B8DAD9500AF11DC /* WeatherView.xib */; };
 		C06AF1831B8DBF2E00AF11DC /* WeatherDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06AF1821B8DBF2E00AF11DC /* WeatherDetail.swift */; };
-		C075BCCB1B6F683A00E7B2D0 /* SXNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C075BCCA1B6F683A00E7B2D0 /* SXNavController.swift */; };
 		C075BCCD1B6F693500E7B2D0 /* SXTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C075BCCC1B6F693500E7B2D0 /* SXTitleLabel.swift */; };
 		C075BCCF1B6F6E7F00E7B2D0 /* SXMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C075BCCE1B6F6E7F00E7B2D0 /* SXMainViewController.swift */; };
 		C075BCD11B6F6EA100E7B2D0 /* SXNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C075BCD01B6F6EA100E7B2D0 /* SXNewsViewController.swift */; };
 		C099C53C1B8329130048D984 /* SXNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C099C53B1B8329130048D984 /* SXNewsCell.swift */; };
 		C099C53E1B832AC90048D984 /* News.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C099C53D1B832AC90048D984 /* News.storyboard */; };
-		C0CDE7731B8C6D3D001AE183 /* SXBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CDE7721B8C6D3D001AE183 /* SXBarButton.swift */; };
 		C0CDE7761B8C6F43001AE183 /* UIView+Frame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CDE7751B8C6F43001AE183 /* UIView+Frame.swift */; };
 		C0CDE7781B8C6FC5001AE183 /* SXHTTPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CDE7771B8C6FC5001AE183 /* SXHTTPManager.swift */; };
 		C0CDE77B1B8C7456001AE183 /* SXDetails.css in Resources */ = {isa = PBXBuildFile; fileRef = C0CDE7791B8C7456001AE183 /* SXDetails.css */; };
 		C0CDE77C1B8C7456001AE183 /* TemplateIcon2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C0CDE77A1B8C7456001AE183 /* TemplateIcon2x.png */; };
-		C0CDE77E1B8C7495001AE183 /* SXTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CDE77D1B8C7495001AE183 /* SXTabBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,11 @@
 		601188854FC37E67F01F3AFC /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		BDD7F2E4697C3F2DC5A1A78A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		C001E11B1B5505F2001B0CB2 /* NewsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
+		C003966C1B90118600B0112D /* Tools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
+		C003966F1B903DF400B0112D /* DS-DIGI.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DS-DIGI.TTF"; sourceTree = "<group>"; };
+		C00396701B903DF400B0112D /* DS-DIGIB.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DS-DIGIB.TTF"; sourceTree = "<group>"; };
+		C00396711B903DF400B0112D /* lijinheiW8.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = lijinheiW8.TTF; sourceTree = "<group>"; };
+		C00396721B903DF400B0112D /* StencilStd.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = StencilStd.ttf; sourceTree = "<group>"; };
 		C03FC6861B736185006A5EB3 /* SXTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SXTableViewController.swift; sourceTree = "<group>"; };
 		C042E4E21B4CBC4C008EB38B /* News163.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = News163.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C042E4E61B4CBC4C008EB38B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -65,27 +72,24 @@
 		C042E4FD1B4CBC4D008EB38B /* News163Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News163Tests.swift; sourceTree = "<group>"; };
 		C042E5081B4CC07B008EB38B /* News163-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "News163-Bridging-Header.h"; sourceTree = "<group>"; };
 		C042E50B1B4CC0BE008EB38B /* NetworkTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkTools.swift; sourceTree = "<group>"; };
+		C04C13611B8FEF0F00C4CC07 /* DetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
 		C06508891B8F0C92000AA55D /* BarButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarButton.swift; sourceTree = "<group>"; };
 		C065088B1B8F0DC0000AA55D /* TabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		C06508BB1B8F1820000AA55D /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
-		C06AF1741B8D463B00AF11DC /* HYQiHei-50J.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HYQiHei-50J.ttf"; sourceTree = "<group>"; };
 		C06AF1761B8D57AC00AF11DC /* NewsURLs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = NewsURLs.plist; sourceTree = "<group>"; };
 		C06AF1781B8DA77F00AF11DC /* WeatherModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		C06AF17D1B8DA96200AF11DC /* WeatherView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
 		C06AF17F1B8DAD9500AF11DC /* WeatherView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeatherView.xib; sourceTree = "<group>"; };
 		C06AF1821B8DBF2E00AF11DC /* WeatherDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherDetail.swift; sourceTree = "<group>"; };
-		C075BCCA1B6F683A00E7B2D0 /* SXNavController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SXNavController.swift; sourceTree = "<group>"; };
 		C075BCCC1B6F693500E7B2D0 /* SXTitleLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SXTitleLabel.swift; sourceTree = "<group>"; };
 		C075BCCE1B6F6E7F00E7B2D0 /* SXMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SXMainViewController.swift; sourceTree = "<group>"; };
 		C075BCD01B6F6EA100E7B2D0 /* SXNewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SXNewsViewController.swift; sourceTree = "<group>"; };
 		C099C53B1B8329130048D984 /* SXNewsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SXNewsCell.swift; sourceTree = "<group>"; };
 		C099C53D1B832AC90048D984 /* News.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = News.storyboard; sourceTree = "<group>"; };
-		C0CDE7721B8C6D3D001AE183 /* SXBarButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SXBarButton.swift; sourceTree = "<group>"; };
 		C0CDE7751B8C6F43001AE183 /* UIView+Frame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Frame.swift"; sourceTree = "<group>"; };
 		C0CDE7771B8C6FC5001AE183 /* SXHTTPManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SXHTTPManager.swift; sourceTree = "<group>"; };
 		C0CDE7791B8C7456001AE183 /* SXDetails.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = SXDetails.css; sourceTree = "<group>"; };
 		C0CDE77A1B8C7456001AE183 /* TemplateIcon2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TemplateIcon2x.png; sourceTree = "<group>"; };
-		C0CDE77D1B8C7495001AE183 /* SXTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SXTabBar.swift; sourceTree = "<group>"; };
 		F0B46D16338F72FD0D9074DA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -125,11 +129,23 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		C003966E1B903DE800B0112D /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				C003966F1B903DF400B0112D /* DS-DIGI.TTF */,
+				C00396701B903DF400B0112D /* DS-DIGIB.TTF */,
+				C00396711B903DF400B0112D /* lijinheiW8.TTF */,
+				C00396721B903DF400B0112D /* StencilStd.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		C03FC6851B736170006A5EB3 /* News */ = {
 			isa = PBXGroup;
 			children = (
 				C03FC6861B736185006A5EB3 /* SXTableViewController.swift */,
 				C099C53B1B8329130048D984 /* SXNewsCell.swift */,
+				C04C13611B8FEF0F00C4CC07 /* DetailController.swift */,
 				C099C53D1B832AC90048D984 /* News.storyboard */,
 			);
 			path = News;
@@ -178,7 +194,6 @@
 			isa = PBXGroup;
 			children = (
 				C06AF1761B8D57AC00AF11DC /* NewsURLs.plist */,
-				C06AF1741B8D463B00AF11DC /* HYQiHei-50J.ttf */,
 				C042E4E61B4CBC4C008EB38B /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -204,10 +219,12 @@
 		C042E5071B4CBF6E008EB38B /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				C003966E1B903DE800B0112D /* Font */,
 				C042E50B1B4CC0BE008EB38B /* NetworkTools.swift */,
 				C001E11B1B5505F2001B0CB2 /* NewsModel.swift */,
 				C06AF1781B8DA77F00AF11DC /* WeatherModel.swift */,
 				C06AF1821B8DBF2E00AF11DC /* WeatherDetail.swift */,
+				C003966C1B90118600B0112D /* Tools.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -234,12 +251,9 @@
 		C075BCC91B6F67E300E7B2D0 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				C075BCCA1B6F683A00E7B2D0 /* SXNavController.swift */,
 				C075BCCC1B6F693500E7B2D0 /* SXTitleLabel.swift */,
 				C075BCCE1B6F6E7F00E7B2D0 /* SXMainViewController.swift */,
 				C075BCD01B6F6EA100E7B2D0 /* SXNewsViewController.swift */,
-				C0CDE7721B8C6D3D001AE183 /* SXBarButton.swift */,
-				C0CDE77D1B8C7495001AE183 /* SXTabBar.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -338,9 +352,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C06AF1751B8D463B00AF11DC /* HYQiHei-50J.ttf in Resources */,
+				C00396731B903DF400B0112D /* DS-DIGI.TTF in Resources */,
+				C00396741B903DF400B0112D /* DS-DIGIB.TTF in Resources */,
 				C042E4ED1B4CBC4C008EB38B /* Main.storyboard in Resources */,
+				C00396751B903DF400B0112D /* lijinheiW8.TTF in Resources */,
 				C06AF1771B8D57AC00AF11DC /* NewsURLs.plist in Resources */,
+				C00396761B903DF400B0112D /* StencilStd.ttf in Resources */,
 				C099C53E1B832AC90048D984 /* News.storyboard in Resources */,
 				C0CDE77B1B8C7456001AE183 /* SXDetails.css in Resources */,
 				C06AF1801B8DAD9500AF11DC /* WeatherView.xib in Resources */,
@@ -397,7 +414,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C001E11C1B5505F2001B0CB2 /* NewsModel.swift in Sources */,
-				C0CDE7731B8C6D3D001AE183 /* SXBarButton.swift in Sources */,
+				C04C13621B8FEF0F00C4CC07 /* DetailController.swift in Sources */,
 				C06508BC1B8F1820000AA55D /* MainTabBarController.swift in Sources */,
 				C065088A1B8F0C92000AA55D /* BarButton.swift in Sources */,
 				C099C53C1B8329130048D984 /* SXNewsCell.swift in Sources */,
@@ -413,8 +430,7 @@
 				C042E50C1B4CC0BE008EB38B /* NetworkTools.swift in Sources */,
 				C0CDE7781B8C6FC5001AE183 /* SXHTTPManager.swift in Sources */,
 				C06AF1831B8DBF2E00AF11DC /* WeatherDetail.swift in Sources */,
-				C0CDE77E1B8C7495001AE183 /* SXTabBar.swift in Sources */,
-				C075BCCB1B6F683A00E7B2D0 /* SXNavController.swift in Sources */,
+				C003966D1B90118600B0112D /* Tools.swift in Sources */,
 				C065088C1B8F0DC0000AA55D /* TabBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

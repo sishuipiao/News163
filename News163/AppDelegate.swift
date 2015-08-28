@@ -22,7 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //UIStatusBar，修改时需要在plist添加View controller-based status bar appearance值为NO
         //前景部分：就是指的显示电池、时间等部分；背景部分：就是显示黑色或者图片的背景部分；
         //LightContent，前景色修改成白色；Default，前景色黑色
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent;
+        //UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent;
+        //self.window?.backgroundColor = UIColor.redColor()
         return true
     }
 

@@ -12,6 +12,7 @@ class MainTabBarController: UITabBarController,TabBarDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         var tabBar:TabBar = TabBar()
         tabBar.frame = self.tabBar.bounds
         tabBar.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 239/255.0, alpha: 1)

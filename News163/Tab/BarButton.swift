@@ -12,13 +12,13 @@ class BarButton: UIButton {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.imageView?.frame = CGRect(x: (self.width()-25)/2, y: 5, width: 25, height: 25)
+        self.imageView?.frame = CGRect(x: (self.width()-20)/2, y: 6, width: 20, height: 20)
         self.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
         
         self.titleLabel?.setX(self.imageView!.x() - (self.titleLabel!.width() - self.imageView!.width())/2)
-        self.titleLabel?.setY(CGRectGetMaxY(self.imageView!.frame)+2)
+        self.titleLabel?.setY(CGRectGetMaxY(self.imageView!.frame)+4)
         
-        self.titleLabel?.font = UIFont(name: "HYQiHei", size: 10)
+        self.titleLabel?.font = UIFont.systemFontOfSize(12)
         self.titleLabel?.shadowColor = UIColor.clearColor()
         self.titleLabel?.textAlignment = NSTextAlignment.Center
         

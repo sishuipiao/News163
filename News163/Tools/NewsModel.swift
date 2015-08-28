@@ -66,8 +66,8 @@ class NewsModel: NSObject {
     var applist:NSArray?
     
     var wap_portal:String?
-    var live_info:String?
-    var ads:String?
+    var live_info:LiveInfoModel?
+    var ads:NSArray?
     var videosource:String?
  
     class func newsModelWithDic(dict:NSDictionary) -> NewsModel {
@@ -75,4 +75,26 @@ class NewsModel: NSObject {
         model.setValuesForKeysWithDictionary(dict as [NSObject : AnyObject])
         return model
     }
+    
+    override static func objectClassInArray() -> [NSObject : AnyObject]! {
+        return ["ads":"AdsModel"]
+    }
+}
+
+class AdsModel: NSObject {
+    var imgsrc:String?
+    var subtitle:String?
+    var tag:String?
+    var title:String?
+    var url:String?
+}
+
+class LiveInfoModel:NSObject {
+    var end_time:String?
+    var roomId:String?
+    var start_time:String?
+    
+    var type:NSNumber?
+    var user_count:NSNumber?
+    var video:NSNumber?
 }

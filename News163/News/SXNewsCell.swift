@@ -21,14 +21,10 @@ class SXNewsCell: UITableViewCell {
     
     @IBOutlet weak var imgOther2: UIImageView! //第三张图片(如果有)
     
-    var newsModel:NewsModel?
-    
     func setnewsModel(model:NewsModel) {
-        self.newsModel = model
         self.imgIcon.setImageWithURL((NSURL(string: model.imgsrc!)),placeholderImage:UIImage(named: "302"))
         self.libTitle.text = model.title
         self.libSubTitle?.text = model.digest
-        
         
         //如果回复太多就改成几点几万
         if (model.replyCount?.doubleValue >= 10000) {
@@ -40,20 +36,20 @@ class SXNewsCell: UITableViewCell {
         }
         
         //多图cell
-        if (model.imgextra?.count == 2) {
+        if (model.imgextra?.count > 1) {
             self.imgOther1?.setImageWithURL((NSURL(string: model.imgextra?[0]["imgsrc"] as! String)), placeholderImage: UIImage(named: "302"))
             self.imgOther2?.setImageWithURL((NSURL(string: model.imgextra?[1]["imgsrc"] as! String)), placeholderImage: UIImage(named: "302"))
         }
     }
     
-    class func idForRow(newsModel:NewsModel) ->String {
-        if (newsModel.hasHead != nil && newsModel.photosetID != nil) {
+    class func idForRow(model:NewsModel) ->String {
+        if (model.hasHead != nil && model.photosetID != nil) {
             return "TopImageCell"
-        }else if (newsModel.hasHead != nil) {
+        }else if (model.hasHead != nil) {
             return "TopTxtCell"
-        }else if (newsModel.imgType != nil) {
+        }else if (model.imgType != nil) {
             return "BigImageCell"
-        }else if (newsModel.imgextra != nil) {
+        }else if (model.imgextra != nil) {
             return "ImagesCell"
         }else {
             return "NewsCell"
@@ -62,15 +58,15 @@ class SXNewsCell: UITableViewCell {
     
     class func heightForRow(newsModel:NewsModel) -> CGFloat {
         if (newsModel.hasHead != nil && newsModel.photosetID != nil) {
-            return 245
+            return 247
         }else if (newsModel.hasHead != nil) {
-            return 245
+            return 247
         }else if (newsModel.imgType != nil) {
             return 170
         }else if (newsModel.imgextra != nil) {
             return 130
         }else {
-            return 80
+            return 89
         }
     }
 

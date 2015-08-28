@@ -2,19 +2,20 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="S7Y-Ng-UVB">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Nav Controller-->
         <scene sceneID="mHM-le-qvg">
             <objects>
-                <navigationController id="q0I-eh-wBp" userLabel="Nav Controller" sceneMemberID="viewController">
+                <navigationController navigationBarHidden="YES" id="q0I-eh-wBp" userLabel="Nav Controller" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" id="zFV-am-daR"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="lSB-WL-o0G">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="barTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                         </textAttributes>
@@ -39,6 +40,52 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nrw-Gh-rU9">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yZw-Ds-fR9">
+                                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="yZw-Ds-fR9" secondAttribute="height" multiplier="1:1" id="Rxl-fm-5he"/>
+                                        </constraints>
+                                        <state key="normal" image="top_navi_bell_normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="11111" translatesAutoresizingMaskIntoConstraints="NO" id="gCc-ZN-xsi">
+                                        <rect key="frame" x="162" y="10" width="51" height="23"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="23" id="BlC-Ia-eaW"/>
+                                            <constraint firstAttribute="width" constant="51" id="hqe-mV-vTI"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rfv-b2-a9H">
+                                        <rect key="frame" x="331" y="0.0" width="44" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Rfv-b2-a9H" secondAttribute="height" multiplier="1:1" id="FLH-cw-ELg"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" image="top_navigation_square">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="rightItemClick:" destination="58t-ng-RQk" eventType="touchUpInside" id="pJZ-if-fH0"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.8784313725490196" green="0.24313725490196078" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Rfv-b2-a9H" secondAttribute="trailing" id="2D9-kZ-e8R"/>
+                                    <constraint firstAttribute="bottom" secondItem="Rfv-b2-a9H" secondAttribute="bottom" id="5RQ-Ue-P09"/>
+                                    <constraint firstAttribute="bottom" secondItem="yZw-Ds-fR9" secondAttribute="bottom" id="DYH-rv-nQb"/>
+                                    <constraint firstAttribute="height" constant="44" id="EbK-88-z5a"/>
+                                    <constraint firstAttribute="centerX" secondItem="gCc-ZN-xsi" secondAttribute="centerX" id="LO1-7c-UhK"/>
+                                    <constraint firstItem="Rfv-b2-a9H" firstAttribute="top" secondItem="nrw-Gh-rU9" secondAttribute="top" id="Ubw-Ho-6rE"/>
+                                    <constraint firstAttribute="centerY" secondItem="gCc-ZN-xsi" secondAttribute="centerY" constant="0.5" id="qRL-W4-8c3"/>
+                                    <constraint firstItem="yZw-Ds-fR9" firstAttribute="top" secondItem="nrw-Gh-rU9" secondAttribute="top" id="ugI-py-dcJ"/>
+                                    <constraint firstItem="yZw-Ds-fR9" firstAttribute="leading" secondItem="nrw-Gh-rU9" secondAttribute="leading" id="ure-iK-VpL"/>
+                                </constraints>
+                            </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photoview_image_default_white" translatesAutoresizingMaskIntoConstraints="NO" id="thP-Bg-lzz">
                                 <rect key="frame" x="27" y="299" width="320" height="70"/>
                             </imageView>
@@ -57,38 +104,27 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="UEd-K5-RPY" secondAttribute="trailing" id="1Du-A9-QVK"/>
                             <constraint firstAttribute="trailing" secondItem="v8K-Ar-DBt" secondAttribute="trailing" id="LrV-ax-mMz"/>
+                            <constraint firstAttribute="trailing" secondItem="nrw-Gh-rU9" secondAttribute="trailing" id="Nrc-4H-n6p"/>
                             <constraint firstItem="v8K-Ar-DBt" firstAttribute="top" secondItem="UEd-K5-RPY" secondAttribute="bottom" id="YyM-WJ-jdn"/>
                             <constraint firstItem="v8K-Ar-DBt" firstAttribute="leading" secondItem="97s-LP-IgX" secondAttribute="leading" id="b0d-9B-Qoy"/>
+                            <constraint firstItem="nrw-Gh-rU9" firstAttribute="top" secondItem="1FL-OP-a8U" secondAttribute="bottom" id="fg2-Oc-2Zk"/>
                             <constraint firstItem="NGf-eX-RIX" firstAttribute="top" secondItem="v8K-Ar-DBt" secondAttribute="bottom" id="hjd-9E-LId"/>
-                            <constraint firstItem="UEd-K5-RPY" firstAttribute="top" secondItem="1FL-OP-a8U" secondAttribute="bottom" id="kXl-MN-Ew9"/>
+                            <constraint firstItem="UEd-K5-RPY" firstAttribute="top" secondItem="1FL-OP-a8U" secondAttribute="bottom" constant="44" id="kXl-MN-Ew9"/>
                             <constraint firstAttribute="centerY" secondItem="thP-Bg-lzz" secondAttribute="centerY" id="n4T-st-ui3"/>
                             <constraint firstAttribute="centerX" secondItem="thP-Bg-lzz" secondAttribute="centerX" id="nis-5t-hTK"/>
                             <constraint firstItem="UEd-K5-RPY" firstAttribute="leading" secondItem="97s-LP-IgX" secondAttribute="leading" id="pdw-Ij-MiX"/>
+                            <constraint firstItem="nrw-Gh-rU9" firstAttribute="leading" secondItem="97s-LP-IgX" secondAttribute="leading" id="sob-OM-h4z"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="WMG-Tp-9bw">
                         <nil key="title"/>
-                        <barButtonItem key="backBarButtonItem" title="主页" id="uTr-8Y-G9q"/>
-                        <barButtonItem key="leftBarButtonItem" image="top_navi_bell_normal" id="QxY-Q7-I8M"/>
-                        <view key="titleView" contentMode="scaleToFill" id="iDI-fw-4nP">
-                            <rect key="frame" x="163" y="11" width="50" height="23"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="11111" translatesAutoresizingMaskIntoConstraints="NO" id="kHd-2B-SnZ">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="23"/>
-                                </imageView>
-                            </subviews>
-                            <constraints>
-                                <constraint firstAttribute="bottom" secondItem="kHd-2B-SnZ" secondAttribute="bottom" id="2Lm-VA-39O"/>
-                                <constraint firstAttribute="trailing" secondItem="kHd-2B-SnZ" secondAttribute="trailing" id="JSc-0n-CGL"/>
-                                <constraint firstItem="kHd-2B-SnZ" firstAttribute="leading" secondItem="iDI-fw-4nP" secondAttribute="leading" id="Ltj-6X-54E"/>
-                                <constraint firstItem="kHd-2B-SnZ" firstAttribute="top" secondItem="iDI-fw-4nP" secondAttribute="top" id="fHf-Bn-6OJ"/>
-                            </constraints>
-                        </view>
                     </navigationItem>
+                    <nil key="simulatedTopBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="bigScrollView" destination="v8K-Ar-DBt" id="olo-2D-Iof"/>
+                        <outlet property="navView" destination="nrw-Gh-rU9" id="Fz7-Es-6Bm"/>
+                        <outlet property="rightItem" destination="Rfv-b2-a9H" id="1FH-6S-74N"/>
                         <outlet property="smallScrollView" destination="UEd-K5-RPY" id="DoU-gW-0FN"/>
                     </connections>
                 </viewController>
@@ -204,5 +240,6 @@
         <image name="11111" width="70" height="33"/>
         <image name="photoview_image_default_white" width="320" height="70"/>
         <image name="top_navi_bell_normal" width="24" height="24"/>
+        <image name="top_navigation_square" width="19" height="19"/>
     </resources>
 </document>

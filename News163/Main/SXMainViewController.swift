@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SXMainViewController: UIViewController,UIScrollViewDelegate {
+class SXMainViewController: UIViewController,UIScrollViewDelegate,UIGestureRecognizerDelegate {
 
     @IBOutlet weak var smallScrollView: UIScrollView!
     
@@ -18,7 +18,9 @@ class SXMainViewController: UIViewController,UIScrollViewDelegate {
     
     var beginOffsetX:CGFloat?
     
-    var rightItem:UIButton!
+    @IBOutlet weak var navView: UIView!
+    
+    @IBOutlet weak var rightItem: UIButton!
     
     var isWeatherShow:Bool!
     
@@ -26,7 +28,7 @@ class SXMainViewController: UIViewController,UIScrollViewDelegate {
     
     var weatherView:WeatherView?
     
-    var tran:UIImageView?
+    var upView:UIView?
     
     //懒加载
     lazy var arrayLists:NSArray? = {
@@ -37,6 +39,15 @@ class SXMainViewController: UIViewController,UIScrollViewDelegate {
     //页面首次加载
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.interactivePopGestureRecognizer.delegate = self
+        
+        var bar:UINavigationBar = UINavigationBar(frame: CGRectMake(0, -24, mainWidth, 44))
+        bar.setBackgroundImage(Tools.createImageWithColor(UIColor(red: 224/255.0, green: 62/255.0, blue: 63/255.0, alpha: 1)), forBarMetrics: UIBarMetrics.Default)
+        bar.shadowImage = UIImage()
+        self.view.addSubview(bar)
+        
+        self.navView.backgroundColor = UIColor(red: 224/255.0, green: 62/255.0, blue: 63/255.0, alpha: 1)
+        
         self.isWeatherShow = false
         self.automaticallyAdjustsScrollViewInsets = false //让你以坐标 0,0 fullScreen 布局
         self.smallScrollView.showsHorizontalScrollIndicator = false
@@ -60,26 +71,15 @@ class SXMainViewController: UIViewController,UIScrollViewDelegate {
         label.setScale(1.0)
         self.bigScrollView.showsHorizontalScrollIndicator = false
         
-        let originX = Int(mainWidth - 45)
-        var rightItem:UIButton = UIButton(frame: CGRect(x: originX, y: 20, width: 45, height: 45))
-        self.rightItem = rightItem
-        var win:UIWindow = (UIApplication.sharedApplication().windows as NSArray).firstObject as! UIWindow
-        win.addSubview(rightItem)
-        rightItem.setImage(UIImage(named: "top_navigation_square"), forState: UIControlState.Normal)
-        rightItem.addTarget(self, action: "rightItemClick", forControlEvents: UIControlEvents.TouchUpInside)
-        println("rightitem.frame:\(rightItem.frame)")
-        
         self.sendWeatherRequest()
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(animated: Bool) {
-        self.rightItem.alpha = 1
-        self.rightItem.enabled = false
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewWillDisappear(animated: Bool) {
         self.rightItem.transform = CGAffineTransformIdentity
         self.rightItem.setImage(UIImage(named: "top_navigation_square"), forState: UIControlState.Normal)
     }
@@ -106,7 +106,7 @@ class SXMainViewController: UIViewController,UIScrollViewDelegate {
             var label = SXTitleLabel(frame: CGRect(x: index * 70, y: 0, width: 70, height: 40))
             var vc:UIViewController = self.childViewControllers[index] as! UIViewController
             label.text = vc.title
-            label.font = UIFont(name: "HYQiHei", size: 18)
+//            label.font = UIFont(name: "DS-Digital", size: 18)
             label.tag = index
             label.userInteractionEnabled = true
             label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "lblClick:"))
@@ -120,7 +120,6 @@ class SXMainViewController: UIViewController,UIScrollViewDelegate {
     //标题栏label的点击时间
     func lblClick(recognizer:UITapGestureRecognizer) {
         let titleLabel:SXTitleLabel = recognizer.view as! SXTitleLabel
-        //self.bigScrollView.contentOffset = CGPoint(x: titleLabel.tag * Int(self.bigScrollView.frame.size.width), y: Int(self.smallScrollView.contentOffset.y))
         self.bigScrollView.setContentOffset(CGPoint(x: titleLabel.tag * Int(self.bigScrollView.frame.size.width), y: Int(self.smallScrollView.contentOffset.y)), animated: false)
         self.selectedIndex(titleLabel.tag)
     }
@@ -195,7 +194,7 @@ class SXMainViewController: UIViewController,UIScrollViewDelegate {
             let weatherModel:WeatherModel = WeatherModel(keyValues: responseObject)
             self.weatherModel = weatherModel
             self.addWeahter()
-            self.rightItem.enabled = true
+            self.rightItem.hidden = false
             }) { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
             println("error:\(error.description)")
         }
@@ -207,26 +206,34 @@ class SXMainViewController: UIViewController,UIScrollViewDelegate {
         weatherView.setWeather(self.weatherModel!)
         self.weatherView = weatherView
         weatherView.frame = CGRect(x: 0, y: 64, width: mainWidth, height: mainHeight - 64)
-        weatherView.alpha = 0.9
+        weatherView.alpha = 0.95
+        weatherView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "rightItemClick:"))
         
+        var upView = UIView(frame: CGRectMake(0, 0, mainWidth, 64))
         var tran:UIImageView = UIImageView(image: UIImage(named: "224"))
-        self.tran = tran
         tran.frame = CGRect(x: mainWidth - 33, y: 57, width: 7, height: 7)
+        upView.addSubview(tran)
+        upView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "rightItemClick:"))
+        self.upView = upView
         
         var win:UIWindow = (UIApplication.sharedApplication().windows as NSArray).firstObject as! UIWindow
         win.addSubview(weatherView)
-        win.addSubview(tran)
+        win.addSubview(upView)
         
         self.weatherView?.hidden = true
-        self.tran?.hidden = true
+        self.upView?.hidden = true
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "pushWeatherDetail", name: "pushWeatherDetail", object: nil)
     }
     
-    func rightItemClick() {
+    func pushWeatherDetail() {
+        self.rightItemClick("")
+    }
+    
+    @IBAction func rightItemClick(sender: AnyObject) {
         if (self.isWeatherShow == true) {
             self.weatherView?.hidden = true
-            self.tran?.hidden = true
+            self.upView?.hidden = true
             UIView.animateWithDuration(0.1, animations: { () -> Void in
                 self.rightItem.transform = CGAffineTransformRotate(self.rightItem.transform, CGFloat(M_1_PI * 5))
                 }, completion: { (finished:Bool) -> Void in
@@ -235,7 +242,7 @@ class SXMainViewController: UIViewController,UIScrollViewDelegate {
         } else {
             self.rightItem.setImage(UIImage(named: "223"), forState: UIControlState.Normal)
             self.weatherView?.hidden = false
-            self.tran?.hidden = false
+            self.upView?.hidden = false
             self.weatherView?.addAnimate()
             UIView.animateWithDuration(0.2, animations: { () -> Void in
                 self.rightItem.transform = CGAffineTransformRotate(self.rightItem.transform, -CGFloat(M_1_PI * 6))
@@ -245,7 +252,6 @@ class SXMainViewController: UIViewController,UIScrollViewDelegate {
         }
         self.isWeatherShow = !self.isWeatherShow
     }
-
     /*
     // MARK: - Navigation
 
