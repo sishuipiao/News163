@@ -3,8 +3,8 @@
     font-size:25px;
     font-weight:bold;
     color:black;
-    margin-left:10px;
-
+    margin-top:7px;
+    margin-left:2px;
 }
 
 .time {
@@ -13,12 +13,24 @@
     color:gray;
     margin-top:7px;
     margin-bottom:7px;
-    margin-left:10px;
-    
+    margin-left:4px;
+}
+
+.source {
+    text-align:left;
+    font-size:15px;
+    color:gray;
+    margin-top:10px;
+    margin-left:15px;
 }
 
 .img-parent {
     text-align:center;
+    margin-top:5px;
     margin-bottom:10px;
+}
 
+p
+{
+    font-size:1.3em;
 }

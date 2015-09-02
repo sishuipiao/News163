@@ -58,15 +58,15 @@ class SXNewsCell: UITableViewCell {
     
     class func heightForRow(newsModel:NewsModel) -> CGFloat {
         if (newsModel.hasHead != nil && newsModel.photosetID != nil) {
-            return 247
+            return 247 * mainWidth / 375
         }else if (newsModel.hasHead != nil) {
-            return 247
+            return 247 * mainWidth / 375
         }else if (newsModel.imgType != nil) {
-            return 170
+            return 170 * mainWidth / 375
         }else if (newsModel.imgextra != nil) {
-            return 130
+            return 130 * mainWidth / 375
         }else {
-            return 89
+            return 89 * mainWidth / 375
         }
     }
 

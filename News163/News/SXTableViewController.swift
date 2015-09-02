@@ -119,9 +119,12 @@ class SXTableViewController: UITableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.destinationViewController.isKindOfClass(DetailController.classForCoder())) {
-            println("yes")
+            let x = self.tableView.indexPathForSelectedRow()!.row
+            var dest:DetailController = segue.destinationViewController as! DetailController
+            dest.newsModel = self.arrayList?.objectAtIndex(x) as! NewsModel
+            self.navigationController?.interactivePopGestureRecognizer.delegate = nil
         } else {
-            let x = self.tableView.indexPathForSelectedRow()?.row
+            let x = self.tableView.indexPathForSelectedRow()!.row
             println("no")
         }
         
@@ -139,8 +142,10 @@ class SXTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        cell.separatorInset = UIEdgeInsetsZero
-        cell.layoutMargins = UIEdgeInsetsZero
+        if (indexPath.row != 0) {
+            cell.separatorInset = UIEdgeInsetsZero
+            cell.layoutMargins = UIEdgeInsetsZero
+        }
     }
 
 }

@@ -40,6 +40,10 @@ class WeatherView: UIView {
     }
     
     override func awakeFromNib() {
+        var button = UIButton(frame: CGRectMake(0, 0, mainWidth, 40 + 216 * mainWidth / 375))
+        button.addTarget(self, action: "pushDetail", forControlEvents: UIControlEvents.TouchUpInside)
+        self.addSubview(button)
+        
         var bottomView = UIView()
         self.bottomView = bottomView
         self.addSubview(bottomView)
@@ -47,7 +51,7 @@ class WeatherView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.bottomView.frame = CGRect(x: 0, y: 255, width: self.width(), height: self.height() - 255)
+        self.bottomView.frame = CGRect(x: 0, y: 40 + 216 * mainWidth / 375, width: self.width(), height: self.height() - (40 + 216 * mainWidth / 375))
         
         self.addBtnWithTitle("搜索", icon: "204", color: UIColor.orangeColor(), index: 0);
         self.addBtnWithTitle("上头条", icon: "202", color: UIColor.redColor(), index: 1);
@@ -65,14 +69,14 @@ class WeatherView: UIView {
         var itemView = UIView(frame: CGRect(x: CGFloat(cols) * w, y: CGFloat(rows) * h, width: w, height: h))
         self.bottomView.addSubview(itemView)
         
-        var btn = UIButton(frame: CGRect(x: 20, y: index > 2 ? 10 : 40, width: w-40, height: w-40))
-        btn.layer.cornerRadius = (w-40)/2
+        var btn = UIButton(frame: CGRect(x: w/5, y: index > 2 ? 10 : 40, width: w * 3 / 5, height: w * 3 / 5))
+        btn.layer.cornerRadius = btn.height()/2
         btn.backgroundColor = color
         itemView.addSubview(btn)
         
         var img = UIImageView(image: UIImage(named: icon))
-        img.setWidth(w-40)
-        img.setHeight(w-40)
+        img.setWidth(btn.height())
+        img.setHeight(btn.height())
         img.center = btn.center
         itemView.addSubview(img)
         
@@ -144,7 +148,8 @@ class WeatherView: UIView {
 
     }
 
-    @IBAction func pushDetail(sender: AnyObject) {
+    func pushDetail() {
+        println("isis")
         NSNotificationCenter.defaultCenter().postNotificationName("pushWeatherDetail", object: nil)
     }
     

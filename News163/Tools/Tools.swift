@@ -20,4 +20,18 @@ class Tools: NSObject {
         UIGraphicsEndImageContext()
         return theimage
     }
+    //string转nsdate
+    class func dateFromString(str:String) -> NSDate {
+        var dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        var date = dateFormatter.dateFromString(str)
+        return date!
+    }
+    //转MM-dd HH:mm
+    class func mmddHHmmFromDate(date:NSDate) -> String {
+        var dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "MM-dd HH:mm"
+        var str = dateFormatter.stringFromDate(date)
+        return str
+    }
 }

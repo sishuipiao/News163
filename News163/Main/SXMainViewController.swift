@@ -76,10 +76,17 @@ class SXMainViewController: UIViewController,UIScrollViewDelegate,UIGestureRecog
     }
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent;
+    }
+    
     override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
         self.rightItem.transform = CGAffineTransformIdentity
         self.rightItem.setImage(UIImage(named: "top_navigation_square"), forState: UIControlState.Normal)
     }
