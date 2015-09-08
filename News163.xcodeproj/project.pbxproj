@@ -33,6 +33,9 @@
 		C075BCCD1B6F693500E7B2D0 /* SXTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C075BCCC1B6F693500E7B2D0 /* SXTitleLabel.swift */; };
 		C075BCCF1B6F6E7F00E7B2D0 /* SXMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C075BCCE1B6F6E7F00E7B2D0 /* SXMainViewController.swift */; };
 		C075BCD11B6F6EA100E7B2D0 /* SXNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C075BCD01B6F6EA100E7B2D0 /* SXNewsViewController.swift */; };
+		C091E8211B9D25E700C427D6 /* ReplyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C091E8201B9D25E700C427D6 /* ReplyModel.swift */; };
+		C091E8231B9D622500C427D6 /* ReplyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C091E8221B9D622500C427D6 /* ReplyController.swift */; };
+		C091E8251B9D670600C427D6 /* ReplyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C091E8241B9D670600C427D6 /* ReplyCell.swift */; };
 		C09663F91B9683E800A19E3E /* DetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09663F81B9683E800A19E3E /* DetailModel.swift */; };
 		C099C53C1B8329130048D984 /* SXNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C099C53B1B8329130048D984 /* SXNewsCell.swift */; };
 		C099C53E1B832AC90048D984 /* News.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C099C53D1B832AC90048D984 /* News.storyboard */; };
@@ -85,6 +88,9 @@
 		C075BCCC1B6F693500E7B2D0 /* SXTitleLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SXTitleLabel.swift; sourceTree = "<group>"; };
 		C075BCCE1B6F6E7F00E7B2D0 /* SXMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SXMainViewController.swift; sourceTree = "<group>"; };
 		C075BCD01B6F6EA100E7B2D0 /* SXNewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SXNewsViewController.swift; sourceTree = "<group>"; };
+		C091E8201B9D25E700C427D6 /* ReplyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplyModel.swift; sourceTree = "<group>"; };
+		C091E8221B9D622500C427D6 /* ReplyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplyController.swift; sourceTree = "<group>"; };
+		C091E8241B9D670600C427D6 /* ReplyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplyCell.swift; sourceTree = "<group>"; };
 		C09663F81B9683E800A19E3E /* DetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailModel.swift; sourceTree = "<group>"; };
 		C099C53B1B8329130048D984 /* SXNewsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SXNewsCell.swift; sourceTree = "<group>"; };
 		C099C53D1B832AC90048D984 /* News.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = News.storyboard; sourceTree = "<group>"; };
@@ -148,6 +154,8 @@
 				C03FC6861B736185006A5EB3 /* SXTableViewController.swift */,
 				C099C53B1B8329130048D984 /* SXNewsCell.swift */,
 				C04C13611B8FEF0F00C4CC07 /* DetailController.swift */,
+				C091E8221B9D622500C427D6 /* ReplyController.swift */,
+				C091E8241B9D670600C427D6 /* ReplyCell.swift */,
 				C099C53D1B832AC90048D984 /* News.storyboard */,
 			);
 			path = News;
@@ -227,6 +235,7 @@
 				C001E11B1B5505F2001B0CB2 /* NewsModel.swift */,
 				C09663F81B9683E800A19E3E /* DetailModel.swift */,
 				C06AF1781B8DA77F00AF11DC /* WeatherModel.swift */,
+				C091E8201B9D25E700C427D6 /* ReplyModel.swift */,
 				C06AF1821B8DBF2E00AF11DC /* WeatherDetail.swift */,
 			);
 			path = Tools;
@@ -421,8 +430,10 @@
 				C06508BC1B8F1820000AA55D /* MainTabBarController.swift in Sources */,
 				C065088A1B8F0C92000AA55D /* BarButton.swift in Sources */,
 				C099C53C1B8329130048D984 /* SXNewsCell.swift in Sources */,
+				C091E8211B9D25E700C427D6 /* ReplyModel.swift in Sources */,
 				C042E4EA1B4CBC4C008EB38B /* ViewController.swift in Sources */,
 				C06AF17E1B8DA96200AF11DC /* WeatherView.swift in Sources */,
+				C091E8251B9D670600C427D6 /* ReplyCell.swift in Sources */,
 				C06AF1791B8DA77F00AF11DC /* WeatherModel.swift in Sources */,
 				C075BCCF1B6F6E7F00E7B2D0 /* SXMainViewController.swift in Sources */,
 				C075BCCD1B6F693500E7B2D0 /* SXTitleLabel.swift in Sources */,
@@ -431,6 +442,7 @@
 				C0CDE7761B8C6F43001AE183 /* UIView+Frame.swift in Sources */,
 				C042E4E81B4CBC4C008EB38B /* AppDelegate.swift in Sources */,
 				C042E50C1B4CC0BE008EB38B /* NetworkTools.swift in Sources */,
+				C091E8231B9D622500C427D6 /* ReplyController.swift in Sources */,
 				C0CDE7781B8C6FC5001AE183 /* SXHTTPManager.swift in Sources */,
 				C09663F91B9683E800A19E3E /* DetailModel.swift in Sources */,
 				C06AF1831B8DBF2E00AF11DC /* WeatherDetail.swift in Sources */,

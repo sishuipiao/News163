@@ -13,6 +13,7 @@ class DetailController: UIViewController,UIWebViewDelegate {
     var newsModel:NewsModel!
     var index:Int?
     var detailModel:DetailModel?
+    var commendArray:NSArray?
     
     @IBOutlet weak var headView: UIView!
     @IBOutlet weak var webView: UIWebView!
@@ -46,6 +47,7 @@ class DetailController: UIViewController,UIWebViewDelegate {
         rightItem.setBackgroundImage(imageSel, forState: UIControlState.Highlighted)
         rightItem.titleLabel?.font = UIFont.systemFontOfSize(13)
         rightItem.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
+        rightItem.addTarget(self, action: "replyDetail", forControlEvents: UIControlEvents.TouchUpInside)
         self.navItem = rightItem
         
         let url = "http://c.m.163.com/nc/article/\(self.newsModel.docid!)/full.html"
@@ -58,12 +60,23 @@ class DetailController: UIViewController,UIWebViewDelegate {
             println("error:\(error.description)")
         }
         
+        let url2 = "http://comment.api.163.com/api/json/post/list/new/hot/\(self.newsModel.boardid!)/\(self.newsModel.docid!)/0/10/10/2/2"
+        SXHTTPManager.shareManager().GET(url2, parameters: nil, success: { (operation:AFHTTPRequestOperation!, responseObject:AnyObject!) -> Void in
+            println(responseObject)
+            if (responseObject["hotPosts"] != nil) {
+                var array:NSArray = responseObject["hotPosts"] as! NSArray
+                self.commendArray = ReplyModel.objectArrayWithKeyValuesArray(array)
+            }
+        }) { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
+            println("error:\(error.description)")
+        }
+        
+        self.automaticallyAdjustsScrollViewInsets = false
         // Do any additional setup after loading the view.
     }
     
     func showInWebView() {
         var html = String(format: "<html><head><link rel=\"stylesheet\" href=\"%@\"></head><body>%@</body></html>", NSBundle.mainBundle().URLForResource("SXDetails.css", withExtension: nil)!,self.touchBody())
-        println(html)
         self.webView.loadHTMLString(html, baseURL: nil)
     }
     
@@ -114,6 +127,30 @@ class DetailController: UIViewController,UIWebViewDelegate {
         self.navItem.setTitle(str as String, forState: UIControlState.Normal)
     }
     
+    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        let url:NSString = NSString(CString: request.URL!.absoluteString!, encoding: NSUTF8StringEncoding)!
+        let range = url.rangeOfString("sx:src=")
+        if (range.location != NSNotFound) {
+            let begin = range.location + range.length
+            let src = url.substringFromIndex(begin)
+            self.savePictureToAlbum(src)
+            return false
+        }
+        return true
+    }
+    
+    func savePictureToAlbum(src:String) {
+        var alert = UIAlertController(title: "提示", message: "确定要保存到相册吗？", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        alert.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "确定", style: UIAlertActionStyle.Destructive, handler: { (action:UIAlertAction!) -> Void in
+            var cache = NSURLCache.sharedURLCache()
+            let request = NSURLRequest(URL: NSURL(string: src)!)
+            let data = cache.cachedResponseForRequest(request)
+            let img = UIImage(data: data!.data)
+            UIImageWriteToSavedPhotosAlbum(img, nil, nil, nil)
+        }))
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -137,6 +174,10 @@ class DetailController: UIViewController,UIWebViewDelegate {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.Default;
     }
     
+    func replyDetail() {
+        let storyBoard = UIStoryboard(name: "News", bundle: NSBundle.mainBundle())
+        
+    }
 
     @IBAction func backBtn(sender: AnyObject) {
         self.navigationController?.popViewControllerAnimated(true)

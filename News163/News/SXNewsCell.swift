@@ -28,7 +28,7 @@ class SXNewsCell: UITableViewCell {
         
         //如果回复太多就改成几点几万
         if (model.replyCount?.doubleValue >= 10000) {
-            self.libReply?.text = String(format: "%.1f万跟帖", model.replyCount!.doubleValue/10000.0)
+            self.libReply?.text = String(format: "%.1f万跟帖", floor(model.replyCount!.doubleValue/1000)/10)
         } else if (model.replyCount != nil) {
             self.libReply?.text = "\(model.replyCount!)跟帖"
         } else {

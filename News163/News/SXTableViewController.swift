@@ -96,12 +96,14 @@ class SXTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         let newsModel:NewsModel = self.arrayList?[indexPath.row] as! NewsModel
+        
         let id:String = SXNewsCell.idForRow(newsModel)
+        
         let cell = tableView.dequeueReusableCellWithIdentifier(id, forIndexPath: indexPath) as! SXNewsCell
         
         cell.setnewsModel(newsModel)
-        // Configure the cell...
         
         return cell
     }
