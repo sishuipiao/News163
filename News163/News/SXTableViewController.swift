@@ -57,11 +57,12 @@ class SXTableViewController: UITableViewController {
     
     func loadDataByType(type:Int,allUrlString:String) {
         NetworkTools.sharedNetworkTools().GET(allUrlString, parameters: nil, success: { (task:NSURLSessionDataTask!, responseObject:AnyObject!) -> Void in
-            println("news:\(responseObject)")
+            print("news:\(responseObject)")
             self.tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
-            let key:String = responseObject.keyEnumerator().nextObject() as! String
+            let responseDic:NSDictionary = responseObject as! NSDictionary
+            let key:String = responseDic.keyEnumerator().nextObject() as! String
             let temArray:NSArray = responseObject[key] as! NSArray
-            var arrayM:NSMutableArray = NewsModel.objectArrayWithKeyValuesArray(temArray)
+            let arrayM:NSMutableArray = NewsModel.objectArrayWithKeyValuesArray(temArray)
             
             if (type == 1) {
                 self.arrayList = arrayM
@@ -74,8 +75,8 @@ class SXTableViewController: UITableViewController {
             }
             
         }) { (task:NSURLSessionDataTask!, error:NSError!) -> Void in
-            println("error:\(error)")
-        }.resume()
+            print("error:\(error)")
+        }!.resume()
     }
 
     // MARK: - Table view data source
@@ -115,19 +116,19 @@ class SXTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        var vc:UIViewController = UIViewController()
+        let vc:UIViewController = UIViewController()
         vc.view.backgroundColor = UIColor.yellowColor()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.destinationViewController.isKindOfClass(DetailController.classForCoder())) {
-            let x = self.tableView.indexPathForSelectedRow()!.row
-            var dest:DetailController = segue.destinationViewController as! DetailController
-            dest.newsModel = self.arrayList?.objectAtIndex(x) as! NewsModel
-            self.navigationController?.interactivePopGestureRecognizer.delegate = nil
+            let x = self.tableView.indexPathForSelectedRow?.row
+            let dest:DetailController = segue.destinationViewController as! DetailController
+            dest.newsModel = self.arrayList?.objectAtIndex(x!) as! NewsModel
+            self.navigationController?.interactivePopGestureRecognizer!.delegate = nil
         } else {
-            let x = self.tableView.indexPathForSelectedRow()!.row
-            println("no")
+            let x = self.tableView.indexPathForSelectedRow?.row
+            print("\(x)")
         }
         
     }

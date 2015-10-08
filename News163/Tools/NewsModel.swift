@@ -71,8 +71,8 @@ class NewsModel: NSObject {
     var videosource:String?
  
     class func newsModelWithDic(dict:NSDictionary) -> NewsModel {
-        var model = NewsModel.alloc()
-        model.setValuesForKeysWithDictionary(dict as [NSObject : AnyObject])
+        let model = NewsModel()
+        model.setValuesForKeysWithDictionary(dict as! [String : AnyObject])
         return model
     }
     

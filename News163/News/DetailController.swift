@@ -41,7 +41,7 @@ class DetailController: UIViewController,UIWebViewDelegate {
         var imageSel = UIImage(named: "contentview_commentbacky_selected")
         imageSel = imageSel?.stretchableImageWithLeftCapWidth(Int(imageSel!.size.width/2), topCapHeight: Int(imageSel!.size.width/2))
         
-        var rightItem = UIButton()
+        let rightItem = UIButton()
         self.headView.addSubview(rightItem)
         rightItem.setBackgroundImage(image, forState: UIControlState.Normal)
         rightItem.setBackgroundImage(imageSel, forState: UIControlState.Highlighted)
@@ -52,23 +52,23 @@ class DetailController: UIViewController,UIWebViewDelegate {
         
         let url = "http://c.m.163.com/nc/article/\(self.newsModel.docid!)/full.html"
         SXHTTPManager.shareManager().GET(url, parameters: nil, success: { (operation:AFHTTPRequestOperation!, responseObject:AnyObject!) -> Void in
-            println(responseObject)
+            print(responseObject)
             self.detailModel = DetailModel(keyValues: responseObject[self.newsModel.docid!])
             self.setRightItem("\(self.detailModel!.replyCount!)回帖")
             self.showInWebView()
             }) { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-            println("error:\(error.description)")
+            print("error:\(error.description)")
         }
         
         let url2 = "http://comment.api.163.com/api/json/post/list/new/hot/\(self.newsModel.boardid!)/\(self.newsModel.docid!)/0/10/10/2/2"
         SXHTTPManager.shareManager().GET(url2, parameters: nil, success: { (operation:AFHTTPRequestOperation!, responseObject:AnyObject!) -> Void in
-            println(responseObject)
+            print(responseObject)
             if (responseObject["hotPosts"] != nil) {
-                var array:NSArray = responseObject["hotPosts"] as! NSArray
+                let array:NSArray = responseObject["hotPosts"] as! NSArray
                 self.commendArray = ReplyModel.objectArrayWithKeyValuesArray(array)
             }
         }) { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-            println("error:\(error.description)")
+            print("error:\(error.description)")
         }
         
         self.automaticallyAdjustsScrollViewInsets = false
@@ -76,7 +76,7 @@ class DetailController: UIViewController,UIWebViewDelegate {
     }
     
     func showInWebView() {
-        var html = String(format: "<html><head><link rel=\"stylesheet\" href=\"%@\"></head><body>%@</body></html>", NSBundle.mainBundle().URLForResource("SXDetails.css", withExtension: nil)!,self.touchBody())
+        let html = String(format: "<html><head><link rel=\"stylesheet\" href=\"%@\"></head><body>%@</body></html>", NSBundle.mainBundle().URLForResource("SXDetails.css", withExtension: nil)!,self.touchBody())
         self.webView.loadHTMLString(html, baseURL: nil)
     }
     
@@ -98,11 +98,11 @@ class DetailController: UIViewController,UIWebViewDelegate {
                 var height:CGFloat = width/1.4
                 
                 if (imgModel.pixel != nil) {
-                    var pixel:Array = imgModel.pixel!.componentsSeparatedByString("*")
-                    width = CGFloat(pixel.first!.toInt()!)
-                    height = CGFloat(pixel.last!.toInt()!)
+                    let pixel:Array = imgModel.pixel!.componentsSeparatedByString("*")
+                    width = CGFloat(Int(pixel.first!)!)
+                    height = CGFloat(Int(pixel.last!)!)
                     
-                    var maxWidth = mainWidth * 0.96
+                    let maxWidth = mainWidth * 0.96
                     if (width > maxWidth) {
                         height = maxWidth / width * height
                         width = maxWidth
@@ -113,7 +113,7 @@ class DetailController: UIViewController,UIWebViewDelegate {
                 "  window.location.href = 'sx:src=' +this.src;"
                 "}"
                 
-                var imgHtml = String(format: "<div class=\"img-parent\"><img onload=\"%@\" width=\"%f\" height=\"%f\" src=\"%@\"></div>", onload,width,height,imgModel.src!)
+                let imgHtml = String(format: "<div class=\"img-parent\"><img onload=\"%@\" width=\"%f\" height=\"%f\" src=\"%@\"></div>", onload,width,height,imgModel.src!)
                 body = body.stringByReplacingOccurrencesOfString(imgModel.ref!, withString: imgHtml, options: NSStringCompareOptions.CaseInsensitiveSearch, range: NSMakeRange(0, body.length))
             }
         }
@@ -128,7 +128,7 @@ class DetailController: UIViewController,UIWebViewDelegate {
     }
     
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        let url:NSString = NSString(CString: request.URL!.absoluteString!, encoding: NSUTF8StringEncoding)!
+        let url:NSString = NSString(CString: request.URL!.absoluteString, encoding: NSUTF8StringEncoding)!
         let range = url.rangeOfString("sx:src=")
         if (range.location != NSNotFound) {
             let begin = range.location + range.length
@@ -140,14 +140,14 @@ class DetailController: UIViewController,UIWebViewDelegate {
     }
     
     func savePictureToAlbum(src:String) {
-        var alert = UIAlertController(title: "提示", message: "确定要保存到相册吗？", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let alert = UIAlertController(title: "提示", message: "确定要保存到相册吗？", preferredStyle: UIAlertControllerStyle.ActionSheet)
         alert.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "确定", style: UIAlertActionStyle.Destructive, handler: { (action:UIAlertAction!) -> Void in
-            var cache = NSURLCache.sharedURLCache()
+            let cache = NSURLCache.sharedURLCache()
             let request = NSURLRequest(URL: NSURL(string: src)!)
             let data = cache.cachedResponseForRequest(request)
             let img = UIImage(data: data!.data)
-            UIImageWriteToSavedPhotosAlbum(img, nil, nil, nil)
+            UIImageWriteToSavedPhotosAlbum(img!, nil, nil, nil)
         }))
     }
     
@@ -175,7 +175,7 @@ class DetailController: UIViewController,UIWebViewDelegate {
     }
     
     func replyDetail() {
-        let storyBoard = UIStoryboard(name: "News", bundle: NSBundle.mainBundle())
+//        let storyBoard = UIStoryboard(name: "News", bundle: NSBundle.mainBundle())
         
     }
 

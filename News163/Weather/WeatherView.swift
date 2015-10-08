@@ -40,11 +40,11 @@ class WeatherView: UIView {
     }
     
     override func awakeFromNib() {
-        var button = UIButton(frame: CGRectMake(0, 0, mainWidth, 40 + 216 * mainWidth / 375))
+        let button = UIButton(frame: CGRectMake(0, 0, mainWidth, 40 + 216 * mainWidth / 375))
         button.addTarget(self, action: "pushDetail", forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(button)
         
-        var bottomView = UIView()
+        let bottomView = UIView()
         self.bottomView = bottomView
         self.addSubview(bottomView)
     }
@@ -66,21 +66,21 @@ class WeatherView: UIView {
         let rows:Int = index/3
         let w:CGFloat = self.width()/3
         let h:CGFloat = self.bottomView.height()/2
-        var itemView = UIView(frame: CGRect(x: CGFloat(cols) * w, y: CGFloat(rows) * h, width: w, height: h))
+        let itemView = UIView(frame: CGRect(x: CGFloat(cols) * w, y: CGFloat(rows) * h, width: w, height: h))
         self.bottomView.addSubview(itemView)
         
-        var btn = UIButton(frame: CGRect(x: w/5, y: index > 2 ? 10 : 40, width: w * 3 / 5, height: w * 3 / 5))
+        let btn = UIButton(frame: CGRect(x: w/5, y: index > 2 ? 10 : 40, width: w * 3 / 5, height: w * 3 / 5))
         btn.layer.cornerRadius = btn.height()/2
         btn.backgroundColor = color
         itemView.addSubview(btn)
         
-        var img = UIImageView(image: UIImage(named: icon))
+        let img = UIImageView(image: UIImage(named: icon))
         img.setWidth(btn.height())
         img.setHeight(btn.height())
         img.center = btn.center
         itemView.addSubview(img)
         
-        var titleLabel = UILabel()
+        let titleLabel = UILabel()
         titleLabel.setHeight(40)
         titleLabel.setWidth(itemView.width())
         titleLabel.setX(0)
@@ -149,7 +149,7 @@ class WeatherView: UIView {
     }
 
     func pushDetail() {
-        println("isis")
+        print("isis")
         NSNotificationCenter.defaultCenter().postNotificationName("pushWeatherDetail", object: nil)
     }
     
@@ -157,7 +157,7 @@ class WeatherView: UIView {
         self.nowTempLabel.text = "\(model.rt_temperature)"
         let weatherDetail:WeatherDetail = WeatherDetail(keyValues: model.detailArray.objectAtIndex(0))
         
-        var temp:NSMutableString = weatherDetail.temperature.mutableCopy() as! NSMutableString
+        let temp:NSMutableString = weatherDetail.temperature.mutableCopy() as! NSMutableString
         temp.replaceOccurrencesOfString("C", withString: "", options: NSStringCompareOptions.CaseInsensitiveSearch, range: NSMakeRange(0, temp.length))
         
         self.tempLbl.text = temp as String

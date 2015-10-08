@@ -39,9 +39,9 @@ class SXMainViewController: UIViewController,UIScrollViewDelegate,UIGestureRecog
     //页面首次加载
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.interactivePopGestureRecognizer.delegate = self
+        self.navigationController?.interactivePopGestureRecognizer!.delegate = self
         
-        var bar:UINavigationBar = UINavigationBar(frame: CGRectMake(0, -24, mainWidth, 44))
+        let bar:UINavigationBar = UINavigationBar(frame: CGRectMake(0, -24, mainWidth, 44))
         bar.setBackgroundImage(Tools.createImageWithColor(UIColor(red: 224/255.0, green: 62/255.0, blue: 63/255.0, alpha: 1)), forBarMetrics: UIBarMetrics.Default)
         bar.shadowImage = UIImage()
         self.view.addSubview(bar)
@@ -62,12 +62,12 @@ class SXMainViewController: UIViewController,UIScrollViewDelegate,UIGestureRecog
         self.bigScrollView.pagingEnabled = true
         
         //添加默认控制器
-        var vc:UIViewController = self.childViewControllers.first as! UIViewController
+        let vc:UIViewController = self.childViewControllers.first!
         vc.view.frame = self.bigScrollView.bounds
         self.bigScrollView.addSubview(vc.view)
         
         //添加默认高亮label
-        var label:SXTitleLabel = self.smallScrollView.subviews.first as! SXTitleLabel
+        let label:SXTitleLabel = self.smallScrollView.subviews.first as! SXTitleLabel
         label.setScale(1.0)
         self.bigScrollView.showsHorizontalScrollIndicator = false
         
@@ -100,7 +100,7 @@ class SXMainViewController: UIViewController,UIScrollViewDelegate,UIGestureRecog
     func addController() {
 //        for index in 0...self.arrayLists!.count-1
         for var index = 0; index < self.arrayLists!.count; ++index {
-            var vc:SXTableViewController = UIStoryboard(name: "News", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as! SXTableViewController
+            let vc:SXTableViewController = UIStoryboard(name: "News", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as! SXTableViewController
             vc.title = self.arrayLists?[index]["title"] as? String
             vc.urlString = self.arrayLists?[index]["urlString"] as? String
             self.addChildViewController(vc)
@@ -110,8 +110,8 @@ class SXMainViewController: UIViewController,UIScrollViewDelegate,UIGestureRecog
     //添加标题栏
     func addLabel() {
         for index in 0...7 {
-            var label = SXTitleLabel(frame: CGRect(x: index * 70, y: 0, width: 70, height: 40))
-            var vc:UIViewController = self.childViewControllers[index] as! UIViewController
+            let label = SXTitleLabel(frame: CGRect(x: index * 70, y: 0, width: 70, height: 40))
+            let vc:UIViewController = self.childViewControllers[index] 
             label.text = vc.title
 //            label.font = UIFont(name: "DS-Digital", size: 18)
             label.tag = index
@@ -143,16 +143,16 @@ class SXMainViewController: UIViewController,UIScrollViewDelegate,UIGestureRecog
         let offset = CGPoint(x: offsetx, y: self.smallScrollView.contentOffset.y)
         self.smallScrollView.setContentOffset(offset, animated: true)
         
-        var subViews:NSArray = self.smallScrollView.subviews as NSArray
+        let subViews:NSArray = self.smallScrollView.subviews as NSArray
         subViews.enumerateObjectsUsingBlock { (obj:AnyObject!, idx:Int, stop:UnsafeMutablePointer<ObjCBool>) -> Void in
             if (idx != index) {
-                var temLabel:SXTitleLabel = subViews[idx] as! SXTitleLabel
+                let temLabel:SXTitleLabel = subViews[idx] as! SXTitleLabel
                 temLabel.setScale(0.0)
             }
         }
         
         //添加控制器
-        var newsVc:SXTableViewController = self.childViewControllers[index] as! SXTableViewController
+        let newsVc:SXTableViewController = self.childViewControllers[index] as! SXTableViewController
         newsVc.index = index
         if (newsVc.view.superview != nil) {
             return
@@ -181,14 +181,14 @@ class SXMainViewController: UIViewController,UIScrollViewDelegate,UIGestureRecog
         let scaleRight:CGFloat = value - CGFloat(leftIndex)
         let scaleLeft:CGFloat = 1 - scaleRight
         
-        var subViews:NSArray = self.smallScrollView.subviews as NSArray
+        let subViews:NSArray = self.smallScrollView.subviews as NSArray
         
-        var labelLeft:SXTitleLabel = subViews[leftIndex] as! SXTitleLabel
+        let labelLeft:SXTitleLabel = subViews[leftIndex] as! SXTitleLabel
         labelLeft.setScale(CGFloat(scaleLeft))
         
         //考虑到最后一个模块，如果右边已经没有模块了，就不在下面赋值scale了
         if (rightIndex < self.smallScrollView.subviews.count) {
-            var labelRight:SXTitleLabel = subViews[rightIndex] as! SXTitleLabel
+            let labelRight:SXTitleLabel = subViews[rightIndex] as! SXTitleLabel
             labelRight.setScale(CGFloat(scaleRight))
         }
     }
@@ -197,33 +197,33 @@ class SXMainViewController: UIViewController,UIScrollViewDelegate,UIGestureRecog
     func sendWeatherRequest() {
         let url = "http://c.3g.163.com/nc/weather/5YyX5LqsfOWMl%2BS6rA%3D%3D.html"
         SXHTTPManager.shareManager().GET(url, parameters: nil, success: { (operation:AFHTTPRequestOperation!, responseObject:AnyObject!) -> Void in
-            println("responseObject:\(responseObject)")
+            print("responseObject:\(responseObject)")
             let weatherModel:WeatherModel = WeatherModel(keyValues: responseObject)
             self.weatherModel = weatherModel
             self.addWeahter()
             self.rightItem.hidden = false
             }) { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-            println("error:\(error.description)")
+            print("error:\(error.description)")
         }
     }
     
     //添加天气
     func addWeahter() {
-        var weatherView:WeatherView = WeatherView.view()
+        let weatherView:WeatherView = WeatherView.view()
         weatherView.setWeather(self.weatherModel!)
         self.weatherView = weatherView
         weatherView.frame = CGRect(x: 0, y: 64, width: mainWidth, height: mainHeight - 64)
         weatherView.alpha = 0.95
         weatherView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "rightItemClick:"))
         
-        var upView = UIView(frame: CGRectMake(0, 0, mainWidth, 64))
-        var tran:UIImageView = UIImageView(image: UIImage(named: "224"))
+        let upView = UIView(frame: CGRectMake(0, 0, mainWidth, 64))
+        let tran:UIImageView = UIImageView(image: UIImage(named: "224"))
         tran.frame = CGRect(x: mainWidth - 33, y: 57, width: 7, height: 7)
         upView.addSubview(tran)
         upView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "rightItemClick:"))
         self.upView = upView
         
-        var win:UIWindow = (UIApplication.sharedApplication().windows as NSArray).firstObject as! UIWindow
+        let win:UIWindow = (UIApplication.sharedApplication().windows as NSArray).firstObject as! UIWindow
         win.addSubview(weatherView)
         win.addSubview(upView)
         

@@ -10,9 +10,9 @@ import UIKit
 
 class SXHTTPManager: AFHTTPRequestOperationManager {
     class func shareManager() -> SXHTTPManager {
-        var mgr:SXHTTPManager = SXHTTPManager(baseURL: nil)
-        var mgrSet = NSMutableSet()
-        mgrSet.setSet(mgr.responseSerializer.acceptableContentTypes)
+        let mgr:SXHTTPManager = SXHTTPManager(baseURL: nil)
+        let mgrSet = NSMutableSet()
+        mgrSet.setSet(mgr.responseSerializer.acceptableContentTypes!)
         mgrSet.addObject("text/html")
         mgr.responseSerializer.acceptableContentTypes = mgrSet as Set<NSObject>
         return mgr

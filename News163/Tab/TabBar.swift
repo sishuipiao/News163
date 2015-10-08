@@ -15,24 +15,24 @@ class TabBar: UIView {
     var imgView:UIImageView?
     
     override func layoutSubviews() {
-        var imgView:UIImageView = self.subviews[0] as! UIImageView
+        let imgView:UIImageView = self.subviews[0] as! UIImageView
         imgView.frame = self.bounds
         
         for index in 1...self.subviews.count - 1 {
-            var btn:UIButton = self.subviews[index] as! UIButton
+            let btn:UIButton = self.subviews[index] as! UIButton
             btn.frame = CGRect(x: CGFloat(index - 1) * mainWidth/5, y: 0, width: mainWidth/5, height: 49)
             btn.tag = index - 1
         }
     }
     
     func addImageView() {
-        var imgView = UIImageView()
+        let imgView = UIImageView()
         self.imgView = imgView
         self.addSubview(imgView)
     }
     
     func addBarButton(nor:String, dis:String, title:String) {
-        var btn = BarButton()
+        let btn = BarButton()
         
         btn.setImage(UIImage(named: nor), forState: UIControlState.Normal)
         btn.setImage(UIImage(named: dis), forState: UIControlState.Disabled)

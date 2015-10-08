@@ -22,7 +22,7 @@ class SXNewsCell: UITableViewCell {
     @IBOutlet weak var imgOther2: UIImageView! //第三张图片(如果有)
     
     func setnewsModel(model:NewsModel) {
-        self.imgIcon.setImageWithURL((NSURL(string: model.imgsrc!)),placeholderImage:UIImage(named: "302"))
+        self.imgIcon.setImageWithURL((NSURL(string: model.imgsrc!))!,placeholderImage:UIImage(named: "302"))
         self.libTitle.text = model.title
         self.libSubTitle?.text = model.digest
         
@@ -37,8 +37,8 @@ class SXNewsCell: UITableViewCell {
         
         //多图cell
         if (model.imgextra?.count > 1) {
-            self.imgOther1?.setImageWithURL((NSURL(string: model.imgextra?[0]["imgsrc"] as! String)), placeholderImage: UIImage(named: "302"))
-            self.imgOther2?.setImageWithURL((NSURL(string: model.imgextra?[1]["imgsrc"] as! String)), placeholderImage: UIImage(named: "302"))
+            self.imgOther1?.setImageWithURL((NSURL(string: model.imgextra?[0]["imgsrc"] as! String))!, placeholderImage: UIImage(named: "302"))
+            self.imgOther2?.setImageWithURL((NSURL(string: model.imgextra?[1]["imgsrc"] as! String))!, placeholderImage: UIImage(named: "302"))
         }
     }
     

@@ -25,8 +25,8 @@ class SXTitleLabel: UILabel {
     func setScale(scale:CGFloat) {
         self.scale = scale;
         self.textColor = UIColor(red: scale, green: 0.0, blue: 0.0, alpha: 1)
-        var minScale:CGFloat = 0.8
-        var trueScale:CGFloat = minScale + (1-minScale)*scale
+        let minScale:CGFloat = 0.8
+        let trueScale:CGFloat = minScale + (1-minScale)*scale
         self.transform = CGAffineTransformMakeScale(trueScale, trueScale)
     }
 
