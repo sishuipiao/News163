@@ -293,6 +293,7 @@
 				C042E4DF1B4CBC4C008EB38B /* Frameworks */,
 				C042E4E01B4CBC4C008EB38B /* Resources */,
 				5A8F669DF9F7259B53B2CA71 /* Copy Pods Resources */,
+				61FE0E9ED48F734394DAD390 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -401,6 +402,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		61FE0E9ED48F734394DAD390 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8716FEBB917E25CD5B482D61 /* Check Pods Manifest.lock */ = {
@@ -579,6 +595,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "News163/News163-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -595,6 +612,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.panqiang.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "News163/News163-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

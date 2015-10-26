@@ -21,7 +21,7 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - MJExtension (2.5.12)
-  - MJRefresh (2.4.11)
+  - MJRefresh (2.4.12)
 
 DEPENDENCIES:
   - AFNetworking
@@ -31,6 +31,6 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
   MJExtension: 5ab633484e431f777387c70b676c80f993361f1b
-  MJRefresh: b327947f35ab3eb16ca42646b26f7347e6aa7186
+  MJRefresh: ca8e9589895977df32d379d46e6b8a5450b3ff44
 
-COCOAPODS: 0.38.2
+COCOAPODS: 0.39.0

@@ -11,7 +11,7 @@ import UIKit
 class ReplyController: UIViewController,UITableViewDataSource,UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
-    var replys:NSMutableArray?
+    var replys:NSMutableArray!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,18 +30,31 @@ class ReplyController: UIViewController,UITableViewDataSource,UITableViewDelegat
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.replys!.count
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 120
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCellWithIdentifier("replyCell", forIndexPath: indexPath) as! ReplyCell
         
+        let reply:ReplyModel = self.replys[indexPath.row] as! ReplyModel
         
+        if (reply.img != nil) {
+            cell.headImg.setImageWithURL(NSURL(string: reply.img!)!, placeholderImage: UIImage(named: ""))
+        }else{
+            cell.headImg.image = UIImage(named: "comment_profile_default")
+        }
+        cell.nameLabel.text = reply.name == nil ? "火星网友" : reply.name
+        cell.locateLabel.text = Tools.filterNBSP(reply.locate!)
+        cell.commendLabel.text = Tools.filterNBSP(reply.commend!)
+        cell.replyCoutLabel.text = reply.up?.stringValue
         
         return cell
     }

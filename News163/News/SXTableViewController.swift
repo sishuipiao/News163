@@ -40,9 +40,9 @@ class SXTableViewController: UITableViewController {
         NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "contentStart", object: nil))
     }
     
-    override func prefersStatusBarHidden() -> Bool {
-        return true
-    }
+//    override func prefersStatusBarHidden() -> Bool {
+//        return true
+//    }
     
     func loadData() {
         // http://c.m.163.com//nc/article/headline/T1348647853363/0-30.html
@@ -130,9 +130,7 @@ class SXTableViewController: UITableViewController {
             let x = self.tableView.indexPathForSelectedRow?.row
             print("\(x)")
         }
-        
     }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

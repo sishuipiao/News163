@@ -34,4 +34,12 @@ class Tools: NSObject {
         let str = dateFormatter.stringFromDate(date)
         return str
     }
+    class func filterNBSP(html:String) -> String{
+        let nsstr:NSString = html
+        let range:NSRange = nsstr.rangeOfString("&nbsp;")
+        if range.location == NSNotFound {
+            return html
+        }
+        return nsstr.substringToIndex(range.location)
+    }
 }

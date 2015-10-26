@@ -7,13 +7,13 @@
 //
 
 import UIKit
+import AssetsLibrary
 
 class DetailController: UIViewController,UIWebViewDelegate {
 
     var newsModel:NewsModel!
     var index:Int?
     var detailModel:DetailModel?
-    var commendArray:NSArray?
     
     @IBOutlet weak var headView: UIView!
     @IBOutlet weak var webView: UIWebView!
@@ -42,17 +42,18 @@ class DetailController: UIViewController,UIWebViewDelegate {
         imageSel = imageSel?.stretchableImageWithLeftCapWidth(Int(imageSel!.size.width/2), topCapHeight: Int(imageSel!.size.width/2))
         
         let rightItem = UIButton()
-        self.headView.addSubview(rightItem)
         rightItem.setBackgroundImage(image, forState: UIControlState.Normal)
         rightItem.setBackgroundImage(imageSel, forState: UIControlState.Highlighted)
         rightItem.titleLabel?.font = UIFont.systemFontOfSize(13)
         rightItem.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
         rightItem.addTarget(self, action: "replyDetail", forControlEvents: UIControlEvents.TouchUpInside)
+        self.headView.addSubview(rightItem)
         self.navItem = rightItem
+        self.navItem.userInteractionEnabled = false
         
         let url = "http://c.m.163.com/nc/article/\(self.newsModel.docid!)/full.html"
         SXHTTPManager.shareManager().GET(url, parameters: nil, success: { (operation:AFHTTPRequestOperation!, responseObject:AnyObject!) -> Void in
-            print(responseObject)
+            print("html:\(responseObject)")
             self.detailModel = DetailModel(keyValues: responseObject[self.newsModel.docid!])
             self.setRightItem("\(self.detailModel!.replyCount!)回帖")
             self.showInWebView()
@@ -62,10 +63,11 @@ class DetailController: UIViewController,UIWebViewDelegate {
         
         let url2 = "http://comment.api.163.com/api/json/post/list/new/hot/\(self.newsModel.boardid!)/\(self.newsModel.docid!)/0/10/10/2/2"
         SXHTTPManager.shareManager().GET(url2, parameters: nil, success: { (operation:AFHTTPRequestOperation!, responseObject:AnyObject!) -> Void in
-            print(responseObject)
-            if (responseObject["hotPosts"] != nil) {
+            print("replys:\(responseObject)")
+            self.navItem.userInteractionEnabled = true
+            if (responseObject["hotPosts"] != nil && !(responseObject["hotPosts"]!!.isEqual(NSNull()))) {
                 let array:NSArray = responseObject["hotPosts"] as! NSArray
-                self.commendArray = ReplyModel.objectArrayWithKeyValuesArray(array)
+                self.replyModels = ReplyModel.objectArrayWithKeyValuesArray(array)
             }
         }) { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
             print("error:\(error.description)")
@@ -73,6 +75,10 @@ class DetailController: UIViewController,UIWebViewDelegate {
         
         self.automaticallyAdjustsScrollViewInsets = false
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     func showInWebView() {
@@ -109,9 +115,7 @@ class DetailController: UIViewController,UIWebViewDelegate {
                     }
                 }
                 
-                let onload = "this.onclick = function() {"
-                "  window.location.href = 'sx:src=' +this.src;"
-                "}"
+                let onload = "this.onclick = function() {  window.location.href = 'sx:src=' +this.src;};"
                 
                 let imgHtml = String(format: "<div class=\"img-parent\"><img onload=\"%@\" width=\"%f\" height=\"%f\" src=\"%@\"></div>", onload,width,height,imgModel.src!)
                 body = body.stringByReplacingOccurrencesOfString(imgModel.ref!, withString: imgHtml, options: NSStringCompareOptions.CaseInsensitiveSearch, range: NSMakeRange(0, body.length))
@@ -143,45 +147,47 @@ class DetailController: UIViewController,UIWebViewDelegate {
         let alert = UIAlertController(title: "提示", message: "确定要保存到相册吗？", preferredStyle: UIAlertControllerStyle.ActionSheet)
         alert.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "确定", style: UIAlertActionStyle.Destructive, handler: { (action:UIAlertAction!) -> Void in
-            let cache = NSURLCache.sharedURLCache()
-            let request = NSURLRequest(URL: NSURL(string: src)!)
-            let data = cache.cachedResponseForRequest(request)
-            let img = UIImage(data: data!.data)
-            UIImageWriteToSavedPhotosAlbum(img!, nil, nil, nil)
+            if (ALAssetsLibrary.authorizationStatus() == ALAuthorizationStatus.Denied) {
+                let assetAlert = UIAlertView(title: nil, message: "我擦里个DJ！居然不让我访问你的照片！", delegate: nil, cancelButtonTitle: "你敢点我试试看！")
+                assetAlert.show()
+//                let assetAlert = UIAlertController(title: "我擦！", message: "我擦里个DJ！居然不让我访问你的照片！", preferredStyle: UIAlertControllerStyle.ActionSheet)
+//                assetAlert.addAction(UIAlertAction(title: "你敢点我试试看！", style: UIAlertActionStyle.Cancel, handler: nil))
+//                self.presentViewController(assetAlert, animated: true, completion: nil)
+            }else{
+                let data = NSData(contentsOfURL: NSURL(string: src)!)
+                let img = UIImage(data: data!)
+                UIImageWriteToSavedPhotosAlbum(img!, nil, nil, nil)
+            }
         }))
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(NSEC_PER_SEC/5))
-        dispatch_after(time, dispatch_get_main_queue()) { () -> Void in
-            self.changeStatusBar()
-        }
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        //UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.Default;
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    func changeStatusBar() {
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.Default;
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     func replyDetail() {
-//        let storyBoard = UIStoryboard(name: "News", bundle: NSBundle.mainBundle())
-        
+        let storyBoard = UIStoryboard(name: "News", bundle: NSBundle.mainBundle())
+        let replyDetail = storyBoard.instantiateViewControllerWithIdentifier("ReplyDetail") as! ReplyController
+        if ((self.navigationController?.interactivePopGestureRecognizer) != nil) {
+            self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
+        }
+        replyDetail.replys = self.replyModels
+        self.navigationController?.pushViewController(replyDetail, animated: true)
     }
 
     @IBAction func backBtn(sender: AnyObject) {
         self.navigationController?.popViewControllerAnimated(true)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.Default
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
 
     /*

@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import CoreLocation
 
-class SXMainViewController: UIViewController,UIScrollViewDelegate,UIGestureRecognizerDelegate {
+class SXMainViewController: UIViewController,UIScrollViewDelegate,UIGestureRecognizerDelegate,CLLocationManagerDelegate {
 
     @IBOutlet weak var smallScrollView: UIScrollView!
     
@@ -29,6 +30,10 @@ class SXMainViewController: UIViewController,UIScrollViewDelegate,UIGestureRecog
     var weatherView:WeatherView?
     
     var upView:UIView?
+    
+    var locationManager:CLLocationManager!
+    
+    var CLlocation:CLLocation?
     
     //懒加载
     lazy var arrayLists:NSArray? = {
@@ -71,6 +76,8 @@ class SXMainViewController: UIViewController,UIScrollViewDelegate,UIGestureRecog
         label.setScale(1.0)
         self.bigScrollView.showsHorizontalScrollIndicator = false
         
+        self.startLocation()
+        
         self.sendWeatherRequest()
         // Do any additional setup after loading the view.
     }
@@ -80,20 +87,10 @@ class SXMainViewController: UIViewController,UIScrollViewDelegate,UIGestureRecog
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent;
-    }
-    
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         self.rightItem.transform = CGAffineTransformIdentity
         self.rightItem.setImage(UIImage(named: "top_navigation_square"), forState: UIControlState.Normal)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     //添加子控制器
@@ -193,6 +190,54 @@ class SXMainViewController: UIViewController,UIScrollViewDelegate,UIGestureRecog
         }
     }
     
+    //定位
+    func startLocation() {
+        self.locationManager = CLLocationManager()
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest  //定位精度
+        self.locationManager.distanceFilter = 1.0    //距离筛选器
+        self.locationManager.startUpdatingLocation()
+    }
+    
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        if (status == CLAuthorizationStatus.NotDetermined) {
+            self.locationManager.requestWhenInUseAuthorization()
+//            if #available(iOS 9.0, *) {
+//                self.locationManager.allowsBackgroundLocationUpdates = true
+//            } else {
+//                self.locationManager.requestAlwaysAuthorization()
+//            }
+        }
+    }
+    
+    //locationManagerDelegate
+    
+    func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
+        print("when this delegate run")
+    }
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if (CLlocation != nil) {
+            return
+        }
+        self.locationManager.stopUpdatingLocation()
+        print(String(format: "经度%3.5f\n纬度%3.5f", (locations.last?.coordinate.latitude)!,(locations.last?.coordinate.longitude)!) )
+        CLlocation = locations.last
+        let geoCoder = CLGeocoder()
+        geoCoder.reverseGeocodeLocation(locations.last!) { (placemarks:[CLPlacemark]?, error:NSError?) -> Void in
+            for placemark:CLPlacemark in placemarks! {
+                //获取城市
+                var city = placemark.locality
+                if (city == nil) {
+                    //直辖市无法通过locality获得，只能通过获取省份的方法来获得（如果city为空，则可知为直辖市）
+                    city = placemark.administrativeArea
+                }
+                print("ISO国家编码:\(placemark.ISOcountryCode) \n国家:\(placemark.country) \n省区:\(placemark.administrativeArea) \n城市:\(placemark.locality) \n区域:\(placemark.subLocality) \n街道:\(placemark.thoroughfare) \n详细地址:\(placemark.name)")
+                return
+            }
+        }
+    }
+    
     //获取天气
     func sendWeatherRequest() {
         let url = "http://c.3g.163.com/nc/weather/5YyX5LqsfOWMl%2BS6rA%3D%3D.html"
@@ -259,6 +304,16 @@ class SXMainViewController: UIViewController,UIScrollViewDelegate,UIGestureRecog
         }
         self.isWeatherShow = !self.isWeatherShow
     }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
     /*
     // MARK: - Navigation
 

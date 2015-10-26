@@ -17,6 +17,6 @@ class ReplyModel: NSObject {
     var up:NSNumber?
     
     override static func replacedKeyFromPropertyName() -> [NSObject : AnyObject]! {
-        return ["img":"1.timg","name":"1.n","locate":"1.f","time":"1.t","commend":"1.f","up":"1.v"]
+        return ["img":"1.timg","name":"1.n","locate":"1.f","time":"1.t","commend":"1.b","up":"1.v"]
     }
 }
