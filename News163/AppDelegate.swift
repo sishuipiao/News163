@@ -10,6 +10,7 @@ import UIKit
 
 let mainWidth = UIScreen.mainScreen().bounds.size.width
 let mainHeight = UIScreen.mainScreen().bounds.size.height
+let Vote_View_Tag = 50
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

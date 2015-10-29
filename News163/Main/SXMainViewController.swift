@@ -196,6 +196,11 @@ class SXMainViewController: UIViewController,UIScrollViewDelegate,UIGestureRecog
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest  //定位精度
         self.locationManager.distanceFilter = 1.0    //距离筛选器
+        if #available(iOS 9.0, *) {
+            self.locationManager.allowsBackgroundLocationUpdates = true
+        } else {
+            // Fallback on earlier versions
+        }
         self.locationManager.startUpdatingLocation()
     }
     

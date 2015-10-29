@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+
 class SXTableViewController: UITableViewController {
     
     var index:NSInteger?
@@ -17,6 +19,8 @@ class SXTableViewController: UITableViewController {
     var urlString:String?
     
     var arrayList:NSMutableArray?
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,6 +110,10 @@ class SXTableViewController: UITableViewController {
         
         cell.setnewsModel(newsModel)
         
+        cell.block = { (tag:Int) -> () in
+            print("tag:\(tag)")
+        }
+        
         return cell
     }
     
@@ -148,5 +156,5 @@ class SXTableViewController: UITableViewController {
             cell.layoutMargins = UIEdgeInsetsZero
         }
     }
-
+    
 }

@@ -6,3 +6,4 @@
 #import "UIKit+AFNetworking.h"
 #import "MJExtension.h"
 #import "MJRefresh.h"
+#import "SDCycleScrollView.h"

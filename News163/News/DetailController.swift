@@ -121,23 +121,38 @@ class DetailController: UIViewController,UIWebViewDelegate {
                 body = body.stringByReplacingOccurrencesOfString(imgModel.ref!, withString: imgHtml, options: NSStringCompareOptions.CaseInsensitiveSearch, range: NSMakeRange(0, body.length))
             }
         }
+        
+        if (self.detailModel?.link?.count != 0) {
+            for index in 0...self.detailModel!.link!.count - 1 {
+                let linkModel:DetailLinkModel = DetailLinkModel(keyValues: self.detailModel!.link![index])
+                let linkHtml = String(format: "<span sytle=\"color:green;\" onclick= \"window.location.href = 'index=%d';\">%@</span>", index,linkModel.title!)
+                body = body.stringByReplacingOccurrencesOfString(linkModel.ref!, withString: linkHtml, options: NSStringCompareOptions.CaseInsensitiveSearch, range: NSMakeRange(0, body.length))
+            }
+        }
         body = body.stringByReplacingOccurrencesOfString("　", withString: "")
         return body as String
     }
     
     func setRightItem(str:NSString) {
         let size = str.sizeWithAttributes([NSFontAttributeName:UIFont.systemFontOfSize(13)])
-        self.navItem.frame = CGRect(x: mainWidth - size.width - 25, y: 0, width: size.width + 20, height: 44)
+        self.navItem.frame = CGRect(x: mainWidth - size.width - 22, y: 0, width: size.width + 20, height: 44)
         self.navItem.setTitle(str as String, forState: UIControlState.Normal)
     }
     
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         let url:NSString = NSString(CString: request.URL!.absoluteString, encoding: NSUTF8StringEncoding)!
-        let range = url.rangeOfString("sx:src=")
-        if (range.location != NSNotFound) {
-            let begin = range.location + range.length
+        let imgRange = url.rangeOfString("sx:src=")
+        if (imgRange.location != NSNotFound) {
+            let begin = imgRange.location + imgRange.length
             let src = url.substringFromIndex(begin)
             self.savePictureToAlbum(src)
+            return false
+        }
+        let linkRange = url.rangeOfString("index=")
+        if (linkRange.location != NSNotFound) {
+            let begin = linkRange.location + linkRange.length
+            let src = url.substringFromIndex(begin)
+            print("guess : \(src)")
             return false
         }
         return true

@@ -82,11 +82,11 @@ class NewsModel: NSObject {
 }
 
 class AdsModel: NSObject {
-    var imgsrc:String?
-    var subtitle:String?
-    var tag:String?
-    var title:String?
-    var url:String?
+    var imgsrc:String?  //图片url地址
+    var subtitle:String? //详情
+    var tag:String?   //标志
+    var title:String?  //标题
+    var url:String?  //连接
 }
 
 class LiveInfoModel:NSObject {

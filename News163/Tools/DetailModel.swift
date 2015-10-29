@@ -16,6 +16,7 @@ class DetailModel: NSObject {
     
     var digest:String?  //简介
     var img:NSArray?    //新闻配图
+    var link:NSArray?   //文字链接
     var dkeys:String?   //图片下文字
     
     var body:String?    //新闻内容
@@ -53,5 +54,15 @@ class DetailRelativeModel: NSObject {
 class DetailtopiclistModel: NSObject {
     var tname:String?       //大标题
     var alias:String?       //简介
+}
+
+class DetailLinkModel: NSObject {
+    var ID:String?
+    var ref:String?       //链接文字
+    var type:String?      //链接类型
+    var title:String?     //链接标题
     
+    override static func replacedKeyFromPropertyName() -> [NSObject : AnyObject]! {
+        return ["ID":"id"]
+    }
 }
