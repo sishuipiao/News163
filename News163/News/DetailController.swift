@@ -14,6 +14,7 @@ class DetailController: UIViewController,UIWebViewDelegate {
     var newsModel:NewsModel!
     var index:Int?
     var detailModel:DetailModel?
+    var replysCount:Int?
     
     @IBOutlet weak var headView: UIView!
     @IBOutlet weak var webView: UIWebView!
@@ -46,31 +47,42 @@ class DetailController: UIViewController,UIWebViewDelegate {
         rightItem.setBackgroundImage(imageSel, forState: UIControlState.Highlighted)
         rightItem.titleLabel?.font = UIFont.systemFontOfSize(13)
         rightItem.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
-        rightItem.addTarget(self, action: "replyDetail", forControlEvents: UIControlEvents.TouchUpInside)
+        rightItem.addTarget(self, action: #selector(DetailController.replyDetail), forControlEvents: UIControlEvents.TouchUpInside)
         self.headView.addSubview(rightItem)
         self.navItem = rightItem
         self.navItem.userInteractionEnabled = false
         
+        //文章html代码
         let url = "http://c.m.163.com/nc/article/\(self.newsModel.docid!)/full.html"
         SXHTTPManager.shareManager().GET(url, parameters: nil, success: { (operation:AFHTTPRequestOperation!, responseObject:AnyObject!) -> Void in
             print("html:\(responseObject)")
             self.detailModel = DetailModel(keyValues: responseObject[self.newsModel.docid!])
-            self.setRightItem("\(self.detailModel!.replyCount!)回帖")
             self.showInWebView()
             }) { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
             print("error:\(error.description)")
         }
         
-        let url2 = "http://comment.api.163.com/api/json/post/list/new/hot/\(self.newsModel.boardid!)/\(self.newsModel.docid!)/0/10/10/2/2"
+        //回帖数
+        let url2 = "http://comment.api.163.com/api/json/thread/total/\(self.newsModel.boardid!)/\(self.newsModel.docid!)"
         SXHTTPManager.shareManager().GET(url2, parameters: nil, success: { (operation:AFHTTPRequestOperation!, responseObject:AnyObject!) -> Void in
-            print("replys:\(responseObject)")
+            print("replysCount:\(responseObject)")
+            let replysCountModel = ReplysCountModel(keyValues: responseObject)
+            self.replysCount = replysCountModel.votecount!.integerValue + replysCountModel.prcount!.integerValue
+            self.setRightItem("\(self.replysCount!)回帖")
             self.navItem.userInteractionEnabled = true
+        }) { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
+            print("error:\(error.description)")
+        }
+        
+        let url3 = "http://comment.api.163.com/api/json/post/list/new/hot/\(self.newsModel.boardid!)/\(self.newsModel.docid!)/0/10/10/2/2"
+        SXHTTPManager.shareManager().GET(url3, parameters: nil, success: { (operation:AFHTTPRequestOperation!, responseObject:AnyObject!) -> Void in
+            print("replysDetail:\(responseObject)")
             if (responseObject["hotPosts"] != nil && !(responseObject["hotPosts"]!!.isEqual(NSNull()))) {
                 let array:NSArray = responseObject["hotPosts"] as! NSArray
                 self.replyModels = ReplyModel.objectArrayWithKeyValuesArray(array)
             }
-        }) { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-            print("error:\(error.description)")
+            }) { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
+                print("error:\(error.description)")
         }
         
         self.automaticallyAdjustsScrollViewInsets = false

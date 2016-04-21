@@ -95,8 +95,7 @@ class SXMainViewController: UIViewController,UIScrollViewDelegate,UIGestureRecog
     
     //添加子控制器
     func addController() {
-//        for index in 0...self.arrayLists!.count-1
-        for var index = 0; index < self.arrayLists!.count; ++index {
+        for index in 0 ..< self.arrayLists!.count {
             let vc:SXTableViewController = UIStoryboard(name: "News", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as! SXTableViewController
             vc.title = self.arrayLists?[index]["title"] as? String
             vc.urlString = self.arrayLists?[index]["urlString"] as? String
@@ -113,7 +112,7 @@ class SXMainViewController: UIViewController,UIScrollViewDelegate,UIGestureRecog
 //            label.font = UIFont(name: "DS-Digital", size: 18)
             label.tag = index
             label.userInteractionEnabled = true
-            label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "lblClick:"))
+            label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(SXMainViewController.lblClick(_:))))
             label.setScale(0.0)
             label.sizeToFit()
             self.smallScrollView.addSubview(label)
@@ -245,16 +244,16 @@ class SXMainViewController: UIViewController,UIScrollViewDelegate,UIGestureRecog
     
     //获取天气
     func sendWeatherRequest() {
-        let url = "http://c.3g.163.com/nc/weather/5YyX5LqsfOWMl%2BS6rA%3D%3D.html"
-        SXHTTPManager.shareManager().GET(url, parameters: nil, success: { (operation:AFHTTPRequestOperation!, responseObject:AnyObject!) -> Void in
-            print("responseObject:\(responseObject)")
-            let weatherModel:WeatherModel = WeatherModel(keyValues: responseObject)
-            self.weatherModel = weatherModel
-            self.addWeahter()
-            self.rightItem.hidden = false
-            }) { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-            print("error:\(error.description)")
-        }
+//        let url = "http://c.3g.163.com/nc/weather/5YyX5LqsfOWMl%2BS6rA%3D%3D.html"
+//        SXHTTPManager.shareManager().GET(url, parameters: nil, success: { (operation:AFHTTPRequestOperation?, responseObject:AnyObject?) -> Void in
+//            print("responseObject:\(responseObject)")
+//            let weatherModel:WeatherModel = WeatherModel(keyValues: responseObject)
+//            self.weatherModel = weatherModel
+//            self.addWeahter()
+//            self.rightItem.hidden = false
+//            }) { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
+//            print("error:\(error.description)")
+//        }
     }
     
     //添加天气
@@ -264,13 +263,13 @@ class SXMainViewController: UIViewController,UIScrollViewDelegate,UIGestureRecog
         self.weatherView = weatherView
         weatherView.frame = CGRect(x: 0, y: 64, width: mainWidth, height: mainHeight - 64)
         weatherView.alpha = 0.95
-        weatherView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "rightItemClick:"))
+        weatherView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(SXMainViewController.rightItemClick(_:))))
         
         let upView = UIView(frame: CGRectMake(0, 0, mainWidth, 64))
         let tran:UIImageView = UIImageView(image: UIImage(named: "224"))
         tran.frame = CGRect(x: mainWidth - 33, y: 57, width: 7, height: 7)
         upView.addSubview(tran)
-        upView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "rightItemClick:"))
+        upView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(SXMainViewController.rightItemClick(_:))))
         self.upView = upView
         
         let win:UIWindow = (UIApplication.sharedApplication().windows as NSArray).firstObject as! UIWindow
@@ -280,7 +279,7 @@ class SXMainViewController: UIViewController,UIScrollViewDelegate,UIGestureRecog
         self.weatherView?.hidden = true
         self.upView?.hidden = true
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "pushWeatherDetail", name: "pushWeatherDetail", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SXMainViewController.pushWeatherDetail), name: "pushWeatherDetail", object: nil)
     }
     
     func pushWeatherDetail() {

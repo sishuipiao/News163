@@ -41,7 +41,7 @@ class TabBar: UIView {
         btn.setTitleColor(UIColor(red: 133/255.0, green: 133/255.0, blue: 133/255.0, alpha: 1), forState: UIControlState.Normal)
         btn.setTitleColor(UIColor(red: 223/255.0, green: 48/255.0, blue: 49/255.0, alpha: 1), forState: UIControlState.Disabled)
         
-        btn.addTarget(self, action: "btnClick:", forControlEvents: UIControlEvents.TouchDown)
+        btn.addTarget(self, action: #selector(TabBar.btnClick(_:)), forControlEvents: UIControlEvents.TouchDown)
         self.addSubview(btn)
         
         if (self.subviews.count == 2) {

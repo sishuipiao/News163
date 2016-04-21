@@ -25,8 +25,8 @@ class SXTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView.header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: "loadData")
-        self.tableView.footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: "loadMoreData")
+        self.tableView.header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(SXTableViewController.loadData))
+        self.tableView.footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(SXTableViewController.loadMoreData))
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.update = true
         // Uncomment the following line to preserve selection between presentations
@@ -112,6 +112,9 @@ class SXTableViewController: UITableViewController {
         
         cell.block = { (tag:Int) -> () in
             print("tag:\(tag)")
+            let newsModel:NewsModel = self.arrayList?[0] as! NewsModel
+            let adsModel:AdsModel = AdsModel(keyValues: newsModel.ads![tag])
+            self.performSegueWithIdentifier("PhotoSets", sender: adsModel)
         }
         
         return cell
@@ -124,8 +127,8 @@ class SXTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        let vc:UIViewController = UIViewController()
-        vc.view.backgroundColor = UIColor.yellowColor()
+//        let vc:UIViewController = UIViewController()
+//        vc.view.backgroundColor = UIColor.yellowColor()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -133,10 +136,18 @@ class SXTableViewController: UITableViewController {
             let x = self.tableView.indexPathForSelectedRow?.row
             let dest:DetailController = segue.destinationViewController as! DetailController
             dest.newsModel = self.arrayList?.objectAtIndex(x!) as! NewsModel
+            dest.hidesBottomBarWhenPushed = true
             self.navigationController?.interactivePopGestureRecognizer!.delegate = nil
         } else {
             let x = self.tableView.indexPathForSelectedRow?.row
-            print("\(x)")
+            let dest:PhotoSetsController = segue.destinationViewController as! PhotoSetsController
+            if (sender != nil) {
+                dest.adsModel = sender as? AdsModel
+            }else{
+                dest.newsModel = self.arrayList?.objectAtIndex(x!) as? NewsModel
+            }
+            dest.hidesBottomBarWhenPushed = true
+            self.navigationController?.interactivePopGestureRecognizer!.delegate = nil
         }
     }
     

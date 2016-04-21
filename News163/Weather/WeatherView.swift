@@ -41,7 +41,7 @@ class WeatherView: UIView {
     
     override func awakeFromNib() {
         let button = UIButton(frame: CGRectMake(0, 0, mainWidth, 40 + 216 * mainWidth / 375))
-        button.addTarget(self, action: "pushDetail", forControlEvents: UIControlEvents.TouchUpInside)
+        button.addTarget(self, action: #selector(WeatherView.pushDetail), forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(button)
         
         let bottomView = UIView()

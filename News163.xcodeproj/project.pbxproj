@@ -14,6 +14,7 @@
 		C00396741B903DF400B0112D /* DS-DIGIB.TTF in Resources */ = {isa = PBXBuildFile; fileRef = C00396701B903DF400B0112D /* DS-DIGIB.TTF */; };
 		C00396751B903DF400B0112D /* lijinheiW8.TTF in Resources */ = {isa = PBXBuildFile; fileRef = C00396711B903DF400B0112D /* lijinheiW8.TTF */; };
 		C00396761B903DF400B0112D /* StencilStd.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C00396721B903DF400B0112D /* StencilStd.ttf */; };
+		C028C1C01BE9B48D0031030B /* PhotoSetsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C028C1BF1BE9B48D0031030B /* PhotoSetsController.swift */; };
 		C03FC6871B736185006A5EB3 /* SXTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03FC6861B736185006A5EB3 /* SXTableViewController.swift */; };
 		C042E4E81B4CBC4C008EB38B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C042E4E71B4CBC4C008EB38B /* AppDelegate.swift */; };
 		C042E4EA1B4CBC4C008EB38B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C042E4E91B4CBC4C008EB38B /* ViewController.swift */; };
@@ -64,6 +65,7 @@
 		C00396701B903DF400B0112D /* DS-DIGIB.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DS-DIGIB.TTF"; sourceTree = "<group>"; };
 		C00396711B903DF400B0112D /* lijinheiW8.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = lijinheiW8.TTF; sourceTree = "<group>"; };
 		C00396721B903DF400B0112D /* StencilStd.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = StencilStd.ttf; sourceTree = "<group>"; };
+		C028C1BF1BE9B48D0031030B /* PhotoSetsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoSetsController.swift; sourceTree = "<group>"; };
 		C03FC6861B736185006A5EB3 /* SXTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SXTableViewController.swift; sourceTree = "<group>"; };
 		C042E4E21B4CBC4C008EB38B /* News163.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = News163.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C042E4E61B4CBC4C008EB38B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				C03FC6861B736185006A5EB3 /* SXTableViewController.swift */,
 				C099C53B1B8329130048D984 /* SXNewsCell.swift */,
 				C04C13611B8FEF0F00C4CC07 /* DetailController.swift */,
+				C028C1BF1BE9B48D0031030B /* PhotoSetsController.swift */,
 				C091E8221B9D622500C427D6 /* ReplyController.swift */,
 				C091E8241B9D670600C427D6 /* ReplyCell.swift */,
 				C099C53D1B832AC90048D984 /* News.storyboard */,
@@ -450,6 +453,7 @@
 				C042E4EA1B4CBC4C008EB38B /* ViewController.swift in Sources */,
 				C06AF17E1B8DA96200AF11DC /* WeatherView.swift in Sources */,
 				C091E8251B9D670600C427D6 /* ReplyCell.swift in Sources */,
+				C028C1C01BE9B48D0031030B /* PhotoSetsController.swift in Sources */,
 				C06AF1791B8DA77F00AF11DC /* WeatherModel.swift in Sources */,
 				C075BCCF1B6F6E7F00E7B2D0 /* SXMainViewController.swift in Sources */,
 				C075BCCD1B6F693500E7B2D0 /* SXTitleLabel.swift in Sources */,

@@ -98,3 +98,8 @@ class LiveInfoModel:NSObject {
     var user_count:NSNumber?
     var video:NSNumber?
 }
+
+class ReplysCountModel: NSObject {
+    var prcount:NSNumber?  //评论数
+    var votecount:NSNumber? //点赞数
+}
